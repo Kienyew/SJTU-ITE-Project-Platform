@@ -1,7 +1,5 @@
-# upgraded-happiness
-名字乱取的。
-
-网页项目的后端，小组内共享代码用。（虽然是公开的，反正也没其他人会来看吧大概）
+# SJTU-Intro-To-Engineering-Project-Platform
+上海交通大学工程学导论项目共享平台。
 
 # 规划
 项目主要在 `app/` 文件夹内：
