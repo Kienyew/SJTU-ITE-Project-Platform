@@ -15,3 +15,7 @@ def make_shell_context():
         'db': db,
         'User': User
     }
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
