@@ -1,4 +1,6 @@
+# User defined
 *.sqlite
+.DS_Store
 
 # Contents below taken from https://github.com/github/gitignore/blob/master/Python.gitignore
 
