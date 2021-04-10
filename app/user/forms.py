@@ -25,3 +25,10 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username exists')
+
+
+class LoginForm(FlaskForm):
+    email_or_username = StringField('Email or username')
+    password = PasswordField('Password', validators=PASSWORD_VALIDATORS)
+    submit = SubmitField('Log in')
+

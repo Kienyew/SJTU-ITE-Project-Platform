@@ -1,9 +1,12 @@
-from werkzeug.security import generate_password_hash
+from typing import Optional
+
+from flask_login import UserMixin
 
 from .. import db
+from .. import login_manager
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True,
@@ -14,5 +17,8 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.username}>'
 
-    def set_password(self, password: str):
-        self.password_hash = generate_password_hash(password)
+
+@login_manager.user_loader
+def load_user(user_id: str) -> Optional[User]:
+    user_id = int(user_id)
+    return User.query.get(user_id)
