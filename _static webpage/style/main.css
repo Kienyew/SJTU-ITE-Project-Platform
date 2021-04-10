@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
+
+:root {
+  --theme-color: #00BCD4;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+  list-style: none;
+  color: #fbfcfd;;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  overscroll-behavior: none;
+  font-size: 2.5rem;
+  font-family: 'Kaiti SC Bold', cursive;
+  font-weight: 300;
+  background-color: #E0EAFC;
+ }
+
+/* General Effect ------------------------------------------------------------------------ */
+.gen-hover {
+  transition: 0.4s;
+}
+
+.gen-hover:hover {
+  color: black;
+  background-color: rgb(250, 243, 243);
+  box-shadow: 0 0 2.5rem var(--theme-color);
+}
+
+.txt-hover {
+  transition: 0.4s;
+}
+
+.txt-hover:hover {
+  color: var(--theme-color);
+}
+
+.txt-hover.active {
+  color: var(--theme-color);
+  pointer-events: none;
+}
+
+/* Main Layout -------------------------------------------------------------------------------- */
+.main-layout {
+  width: 100%;
+  height: 100vh;
+  background-image: url(../sources/background.png);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-logo {
+  width: 30rem;
+  cursor: pointer;
+}
+
+.navbar {
+  width: 85%;
+  height: 15%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-border {
+  font-family: 'Kaiti SC Bold', cursive;
+  font-weight: 900;
+  font-size: 2.5rem;
+  color: #fcfdfd;
+  padding: 1rem 2.5rem;
+  background: transparent;
+  border: 1px solid #fff;
+  border-radius: 2rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.content small {
+  color: #ecf0f5;;
+  font-size: 3rem;
+}
+
+.content h1 {
+  font-size: 8rem;
+  margin: 0rem 0 8rem;
+}
+
+.side-bar {
+  height: 100vh;
+  width: 7rem;
+  background: linear-gradient(#0f6379, #020b36);
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.menu-btn {
+  display: block;
+  width: 3.5rem;
+  margin: 6.5rem auto 0;
+  cursor: pointer;
+}
+
+.social-links {
+  width: 7rem;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.other-links {
+  width: 7rem;
+  text-align: center;
+  position: absolute;
+  bottom: 3rem;
+}
+
+.social-links img, .other-links img{
+  width: 4rem;
+  margin: 1rem auto;
+  cursor: pointer;
+}
+
+/* Bubbles animation ---------------------------------------------------- */
+.bubbles {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  bottom: -7rem;
+}
+
+.bubbles img {
+  width: 5rem;  
+  animation: bubble-float 7s ease-in-out infinite;
+}
+
+@keyframes bubble-float {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-80vh);
+    opacity: 0;
+  }
+}
+
+.bubbles img:nth-child(1) {
+  animation-delay: 1.3s;
+  width: 2.5rem;
+}
+
+.bubbles img:nth-child(2) {
+  animation-delay: 3s;
+}
+.bubbles img:nth-child(3) {
+  animation-delay: 5.6s;
+  width: 2.2rem;
+}
+.bubbles img:nth-child(4) {
+  animation-delay: 3.4s;
+}
+.bubbles img:nth-child(5) {
+  width: 2.1rem;
+  animation-delay: 2.4s;
+}
+.bubbles img:nth-child(6) {
+  animation-delay: 6.5s;
+}
+.bubbles img:nth-child(7) {
+  animation-delay: 4.6s;
+  width: 3.9rem;
+}
