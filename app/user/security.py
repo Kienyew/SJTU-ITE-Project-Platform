@@ -9,13 +9,9 @@ from .models import User
 
 def register_new_user(email: str, username: str, password: str):
     user = User(email=email, username=username)
-    user_set_password(user, password)
+    user.password_hash = generate_password_hash(password)
     db.session.add(user)
     db.session.commit()
-
-
-def user_set_password(user: User, password: str):
-    user.password_hash = generate_password_hash(password)
 
 
 def verify_user_login(username_or_email: str, password: str) -> Optional[User]:

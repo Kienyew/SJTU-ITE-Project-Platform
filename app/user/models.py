@@ -15,10 +15,9 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128), nullable=False)
 
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'User({self.id}, {self.username}, {self.email})'
 
 
 @login_manager.user_loader
 def load_user(user_id: str) -> Optional[User]:
-    user_id = int(user_id)
-    return User.query.get(user_id)
+    return User.query.get(int(user_id))
