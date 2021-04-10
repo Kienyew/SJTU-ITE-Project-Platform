@@ -1,5 +1,5 @@
-from flask import render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required
+from flask import render_template, redirect, url_for, flash, request
+from flask_login import login_user, logout_user, login_required, current_user
 
 from . import user_blueprint
 from .forms import RegistrationForm, LoginForm
@@ -19,6 +19,9 @@ def register():
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('root.index'))
+
     form = LoginForm()
     if not form.validate_on_submit():
         return render_template('user/login.html', form=form)
@@ -26,7 +29,11 @@ def login():
     if user := verify_user_login(form.email_or_username.data, form.password.data):
         login_user(user, remember=False)
         flash('Successfully logged in')
-        return redirect(url_for('root.index'))
+        if next_page := request.args.get('next'):
+            return redirect(next_page)
+        else:
+            return redirect(url_for('root.index'))
+
     else:
         flash('Invalid account or password')
         return redirect(url_for('user.login'))
