@@ -1,4 +1,4 @@
-# SJTU-Intro-To-Engineering-Project-Platform
+# SJTU Introduction-To-Engineering Project: Platform
 上海交通大学工程学导论项目共享平台。
 
 # 规划
