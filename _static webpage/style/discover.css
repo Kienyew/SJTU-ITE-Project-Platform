@@ -1,0 +1,201 @@
+/* TODO: Add media query if possible */
+
+/* Header, top */
+.top-page > img {
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.top-page {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+}
+
+.top-page > nav {
+  width: 100%;
+  position: absolute;
+  top: 3%;
+  padding: 0 5rem;
+}
+
+/* Text Effect ------------------------------------------------------------------------ */
+.text-typewriter {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.text-title {
+  font-size: 7rem;
+  color: rgba(224, 224, 224, 0.9);
+  overflow: hidden;
+  border-right: 0.5rem solid rgb(117, 152, 247);
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 1.5rem;
+  animation: typing 3.5s steps(30, end), blink-caret 0.5s step-end infinite;
+}
+
+.text-title b {
+  color: rgb(212, 234, 255);
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    /* Change the border color here */
+    border-color: rgb(117, 152, 247);
+  }
+}
+
+/* Grid View ------------------------------------------------------------------ */
+.box-layout-grid {
+  display: grid;
+  margin: 2.5rem auto;
+  padding: 0 4.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-gap: 2rem;
+  max-width: 150rem;
+}
+
+/* Box Design ------------------------------------------------------------------------ */
+.box {
+  background-color: #dae5fa;
+  width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  /* for animation on revealing */
+  position: relative;
+  transition: 2s;
+  opacity: 0;
+}
+
+.box h5,
+.box a {
+  font-weight: 300;
+  font-size: 1.7rem;
+  letter-spacing: 0.09rem;
+  font-family: "apercu", sans-serif;
+  color: #484949;
+}
+
+.box-body {
+  padding: 1rem 2rem;
+}
+
+.box-text-animation {
+  font-weight: 900 !important;
+  color: #252323;
+}
+
+.box-text-animation:hover {
+  cursor: pointer;
+  color: rgb(131, 131, 131);
+  transition: 0.3s ease-in-out;
+}
+
+/* profile pic and heart icon */
+.box-icon-img {
+  width: 3rem;
+  height: 3rem;
+}
+
+.box-info-sub,
+.box-info-main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box-info-main > div {
+  display: flex;
+  align-items: center;
+}
+
+.box-info-main > div:nth-child(1) > img {
+  margin-right: 1rem;
+}
+
+.box-info-main > div:nth-child(2) > img {
+  margin-left: 1rem;
+}
+
+.box-info-sub {
+  margin: 0.8rem 0 3.4rem 0;
+}
+
+/* Image hover things ------------------------------------------------------------ */
+.box-img-main {
+  /* Could change the theme color later */
+  background-color: #cdddfc;
+  overflow: hidden;
+  position: relative;
+  height: 23vw;
+  max-height: 23rem;
+}
+
+.box-img-main img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease-in-out;
+}
+
+.box-img-main:hover img {
+  opacity: 0.7;
+}
+
+.heart-vector {
+  cursor: pointer;
+  position: absolute;
+  font-size: 9rem;
+  color: rgb(235, 226, 226);
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.3s ease-in-out;
+}
+
+.heart-vector.checked {
+  color: rgb(185, 26, 26);
+}
+
+.box-img-main:hover .heart-vector {
+  opacity: 0.8;
+}
+
+.box-img-main:hover .heart-vector:hover {
+  color: rgb(199, 53, 53);
+  opacity: 0.95;
+}
+
+/* General scroll in effect ------------------------------------------------------- */
+[data-scroll] {
+  transition: 1s ease-in-out;
+}
+[data-scroll="in"] {
+  opacity: 1;
+  transform: translateY(0rem);
+}
+[data-scroll="out"] {
+  opacity: 0;
+  transform: translateY(7rem);
+}
