@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap");
 
 :root {
-  --theme-color: #00BCD4;
+  --theme-color: #00bcd4;
 }
 
 * {
@@ -11,7 +11,7 @@
   outline: none;
   text-decoration: none;
   list-style: none;
-  color: #fbfcfd;;
+  color: #fbfcfd;
 }
 
 html {
@@ -21,11 +21,11 @@ html {
 
 body {
   overscroll-behavior: none;
-  font-size: 2.5rem;
-  font-family: 'Kaiti SC Bold', cursive;
+  font-size: 2.2rem;
+  font-family: "Kaiti SC Bold", cursive;
   font-weight: 300;
-  background-color: #E0EAFC;
- }
+  background-color: #e0eafc;
+}
 
 /* General Effect ------------------------------------------------------------------------ */
 .gen-hover {
@@ -55,7 +55,7 @@ body {
 .main-layout {
   width: 100%;
   height: 100vh;
-  background-image: url(../sources/background.png);
+  background-image: url(../sources/home - background.png);
   background-size: cover;
   background-position: center;
   position: relative;
@@ -77,9 +77,9 @@ body {
 }
 
 .btn-border {
-  font-family: 'Kaiti SC Bold', cursive;
+  font-family: "Kaiti SC Bold", cursive;
   font-weight: 900;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   color: #fcfdfd;
   padding: 1rem 2.5rem;
   background: transparent;
@@ -87,6 +87,17 @@ body {
   border-radius: 2rem;
   outline: none;
   cursor: pointer;
+}
+
+.btn-red {
+  border: 1px solid rgb(255, 65, 65);
+  color: rgb(255, 65, 65);
+}
+
+.btn-red:hover {
+  color: black;
+  background-color: rgb(255, 65, 65);
+  box-shadow: 0 0 2.5rem rgb(255, 65, 65);
 }
 
 .content {
@@ -98,12 +109,12 @@ body {
 }
 
 .content small {
-  color: #ecf0f5;;
-  font-size: 3rem;
+  color: #ecf0f5;
+  font-size: 2.5rem;
 }
 
 .content h1 {
-  font-size: 8rem;
+  font-size: 6.5rem;
   margin: 0rem 0 8rem;
 }
 
@@ -138,7 +149,8 @@ body {
   bottom: 3rem;
 }
 
-.social-links img, .other-links img{
+.social-links img,
+.other-links img {
   width: 4rem;
   margin: 1rem auto;
   cursor: pointer;
@@ -155,7 +167,7 @@ body {
 }
 
 .bubbles img {
-  width: 5rem;  
+  width: 5rem;
   animation: bubble-float 7s ease-in-out infinite;
 }
 

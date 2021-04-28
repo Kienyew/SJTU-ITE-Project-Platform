@@ -1,4 +1,8 @@
 /* TODO: Add media query if possible */
+body {
+  height: 100%;
+  background: #F4F7F6;
+}
 
 /* Header, top */
 .top-page > img {
@@ -19,6 +23,10 @@
   position: absolute;
   top: 3%;
   padding: 0 5rem;
+}
+
+.navbar-main-right button:not(:last-child) {
+  margin-right: 2rem;
 }
 
 /* Text Effect ------------------------------------------------------------------------ */
@@ -78,14 +86,19 @@
 
 /* Box Design ------------------------------------------------------------------------ */
 .box {
-  background-color: #dae5fa;
+  background-color: #FCFCFC;
   width: 100%;
   border-radius: 1rem;
   overflow: hidden;
   /* for animation on revealing */
   position: relative;
-  transition: 2s;
+  transition: 1.5s;
   opacity: 0;
+}
+
+.box:hover {
+  transition: 0.1s;
+  box-shadow: 0 0 2rem rgba(33, 33, 33, 0.2);
 }
 
 .box h5,
@@ -144,7 +157,7 @@
 /* Image hover things ------------------------------------------------------------ */
 .box-img-main {
   /* Could change the theme color later */
-  background-color: #cdddfc;
+  background-color: #e3e3e4;
   overflow: hidden;
   position: relative;
   height: 23vw;
@@ -198,4 +211,56 @@
 [data-scroll="out"] {
   opacity: 0;
   transform: translateY(7rem);
+}
+
+/* Footer ------------------------------------------------------------------------------------------------ */
+.pagination-line {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 0;
+  border-bottom: 0.1rem solid rgba(179, 179, 179, 0.5);
+}
+
+
+.navbar-4 {
+  padding: 5rem 1rem 10rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 2rem;
+  font-family: "apercu", sans-serif;
+}
+
+.pagination {
+  display: flex;
+}
+
+.pagination-number > a,
+.pagination-item {
+  color: #4b566b;
+  transition: 0.3s;
+}
+
+.pagination-item {
+  border-radius: 2rem;
+  word-spacing: 1rem;
+  padding: 0.6rem 1.6rem;
+}
+
+.pagination-item:hover,
+.pagination-number > a:hover {
+  background-color: rgba(78, 84, 200, 0.15);
+}
+
+.pagination-number > a {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 0.4rem;
+}
+
+.pagination-number.active > a {
+  background-color: #7694e9;
+  pointer-events: none;
+  color: white;
+  box-shadow: 0 0.5rem 1.4rem -0.425rem #5674c7;
 }
