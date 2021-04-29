@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-center">开始· 启程</h1>
+</div>
+<h1>Projects:</h1>
+{% for project in projects %}
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="image">
+    <div class="card-body">
+        <h5 class="card-title">{{ project.name }}</h5>
+        <p class="card-text">{{ project.short_description }}</p>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">❤️ {{project.like_count}}</li>
+            <li class="list-group-item">Publisher: {{project.publisher.username}}</li>
+            <li class="list-group-item">Publish date: {{project.publish_time}}</li>
+        </ul>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

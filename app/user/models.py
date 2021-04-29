@@ -12,7 +12,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), unique=True, index=True, nullable=False)
     email = db.Column(db.String(64), unique=True, index=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
-    
+    published_projects = db.relationship('Project', backref='publisher')
+
     def __repr__(self):
         return f'User({self.id}, {self.username}, {self.email})'
 

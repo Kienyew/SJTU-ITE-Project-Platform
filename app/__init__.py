@@ -22,7 +22,9 @@ def create_app(config: Config):
 
     from .main import main_blueprint
     from .user import user_blueprint
-    app.register_blueprint(main_blueprint)
+    from .project import project_blueprint
+    app.register_blueprint(main_blueprint, url_prefix='/')
     app.register_blueprint(user_blueprint, url_prefix='/user')
+    app.register_blueprint(project_blueprint, url_prefix='/project')
 
     return app

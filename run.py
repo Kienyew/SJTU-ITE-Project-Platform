@@ -2,6 +2,7 @@ from flask_migrate import Migrate
 
 from config import Config
 from app.user.models import User
+from app.project.models import Project
 from app import db, create_app
 
 
@@ -13,7 +14,8 @@ migrate = Migrate(app, db)
 def make_shell_context():
     return {
         'db': db,
-        'User': User
+        'User': User,
+        'Project': Project,
     }
 
 
