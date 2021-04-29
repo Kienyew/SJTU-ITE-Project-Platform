@@ -4,6 +4,8 @@ from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, Val
 
 from .models import User
 
+# Form validation and models
+
 EMAIL_VALIDATORS = [DataRequired(), Email()]
 PASSWORD_VALIDATORS = [DataRequired(), Length(8, 64)]
 USERNAME_VALIDATORS = [DataRequired(), Length(
@@ -11,8 +13,8 @@ USERNAME_VALIDATORS = [DataRequired(), Length(
 
 
 class RegistrationForm(FlaskForm):
-    email = StringField('Email', validators=EMAIL_VALIDATORS)
     username = StringField('Username', validators=USERNAME_VALIDATORS)
+    email = StringField('Email', validators=EMAIL_VALIDATORS)
     password = PasswordField('Password', validators=PASSWORD_VALIDATORS)
     password_confirm = PasswordField(
         'Confirm password', validators=PASSWORD_VALIDATORS + [EqualTo('password', "Password doesn't match!")])
@@ -28,6 +30,25 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    # Login Validation in security.py
     email_or_username = StringField('Email or username')
     password = PasswordField('Password', validators=PASSWORD_VALIDATORS)
     submit = SubmitField('Log in')
+
+class ForgetPassword(FlaskForm):
+    email = StringField('Email address', validators=EMAIL_VALIDATORS)
+    submit = SubmitField("Send reset request to my email")
+    
+    def validate_email(self, email):
+        if not User.query.filter_by(email=email.data).first():
+            raise ValidationError("Email does not exist")
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=PASSWORD_VALIDATORS)
+    confirm_password = PasswordField('Confirm Password', validators=PASSWORD_VALIDATORS + [EqualTo('password', "Password doesn't match!")])
+    submit = SubmitField('Reset Password')
+
+class UpdateAccount(FlaskForm):
+    # TODO: Change account information
+    pass
+

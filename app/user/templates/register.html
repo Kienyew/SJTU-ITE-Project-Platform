@@ -16,7 +16,8 @@
 
     <div class="login-content">
       <!-- Main form, remember to add action and token -->
-      <form>
+      <form method="post">
+        {{ form.hidden_tag() }}
         <!-- Change this according to the form type -->
         <img src="{{ url_for('static', filename='resources/form - responsive.png') }}">
         <h2 class="title">欢迎注册</h2>
@@ -26,7 +27,7 @@
           </div>
           <div class="div">
             <h5>用户名</h5>
-            <input type="text" class="input">
+            {{ form.username(class_="input") }}
           </div>
         </div>
 
@@ -36,7 +37,7 @@
           </div>
           <div class="div">
             <h5>邮箱</h5>
-            <input type="password" class="input">
+            {{ form.email(class_="input") }}
           </div>
         </div>
 
@@ -46,7 +47,7 @@
           </div>
           <div class="div">
             <h5>密码</h5>
-            <input type="password" class="input">
+            {{ form.password(class_="input") }}
           </div>
         </div>
 
@@ -56,7 +57,7 @@
           </div>
           <div class="div">
             <h5>确认密码</h5>
-            <input type="password" class="input">
+            {{ form.password_confirm(class_="input") }}
           </div>
         </div>
 
@@ -65,7 +66,7 @@
           <a href="{{ url_for('user.login') }}">已经注册?</a>
           <a href="{{ url_for('user.reset_password') }}">忘记密码?</a>
         </div>
-        <input type="submit" class="form-btn" value="登入">
+        {{ form.submit(class_="form-btn", value="注册") }}
       </form>
     </div>
   </div>

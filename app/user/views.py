@@ -2,19 +2,22 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 
 from . import user_blueprint
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, ForgetPassword
 from .security import verify_user_login, register_new_user
 
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.discover'))
+    
     form = RegistrationForm()
     if not form.validate_on_submit():
         return render_template('register.html', form=form)
 
     register_new_user(form.email.data, form.username.data, form.password.data)
     flash('Successfully registered!')
-    return redirect(url_for('main.discover'))
+    return redirect(url_for('user.login'))
 
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
@@ -50,4 +53,9 @@ def logout():
 @user_blueprint.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
     # TODO: implement this together with automated email response
-    return render_template('forgot password.html')
+    
+    form = ForgetPassword()
+    if not form.validate_on_submit():
+        return render_template('forgot password.html', form=form)
+    
+    return redirect(url_for('user.login'))

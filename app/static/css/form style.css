@@ -119,7 +119,7 @@ form{
 	opacity: 1;
 }
 
-.input-div > div > input{
+.input-div > div > input {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -129,9 +129,8 @@ form{
 	outline: none;
 	background: none;
 	padding: 0.5rem 0.7rem;
-	font-size: 1.2rem;
+	font-size: 2.1rem !important;
 	color: #555;
-	font-family: 'poppins', sans-serif;
 }
 
 .input-div.pass{

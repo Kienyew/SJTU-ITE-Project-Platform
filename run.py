@@ -4,7 +4,7 @@ from config import Config
 from app.user.models import User
 from app.project.models import Project
 from app import db, create_app
-
+import os
 
 app = create_app(Config)
 migrate = Migrate(app, db)
@@ -20,4 +20,9 @@ def make_shell_context():
 
 
 if __name__ == '__main__':
+    # For debugging purpose, create database if not exist in current directory
+    if not os.path.exists(Config.SQLALCHEMY_DATABASE_URI[10:]):
+        print("creating database")  # DEBUG
+        with app.app_context():
+            db.create_all()
     app.run(debug=True)

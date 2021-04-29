@@ -25,7 +25,7 @@ body {
   padding: 0 5rem;
 }
 
-.navbar-main-right button:not(:last-child) {
+.navbar-main-right a:not(:last-child) {
   margin-right: 2rem;
 }
 
