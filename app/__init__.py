@@ -20,9 +20,9 @@ def create_app(config: Config):
     bootstrap.init_app(app)
     login_manager.init_app(app)
 
+    from .main import main_blueprint
     from .user import user_blueprint
-    from .root import root_blueprint
+    app.register_blueprint(main_blueprint)
     app.register_blueprint(user_blueprint, url_prefix='/user')
-    app.register_blueprint(root_blueprint, url_prefix='/')
 
     return app

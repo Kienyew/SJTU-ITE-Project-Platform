@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-root_blueprint = Blueprint('root', __name__)
+main_blueprint = Blueprint('main', __name__, template_folder='templates')
 
 # activate the routing decorators
 from . import views

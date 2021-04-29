@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/bf401d2f01.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='resources/icon - SJTU.ico') }}" type="image/x-icon"/>
+
+    {% block head %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+
+  <body>
+    {% block content %}{% endblock %}
+
+    <!-- TODO: flash message implementation -->
+    <script src="{{ url_for('static', filename='flash script.js') }}"></script>
+    <script>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            showAlert('{{ message }}', '{{ category }}')
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- flask form error -->
+      {% if form %}
+        {% if form.errors %}
+          {% for field, errorMsg in form.errors.items() %}
+            {% for err in errorMsg %}
+              showAlert('{{ err }}', 'danger');
+            {% endfor %}
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+    </script>
+
+  </body>
+</html>

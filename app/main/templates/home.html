@@ -1,0 +1,53 @@
+{% extends "general layout.html" %}
+
+{% block head %}
+  <style>
+    :root {
+      --main-background-url: url('{{ url_for('static', filename='resources/main - background.png', _external=True) }}');
+    }
+  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+{% endblock %}
+
+{% block title %}
+  工导项目展示
+{% endblock %}
+
+{% block content %}
+  <div class="main-layout">
+    <div class="navbar">
+      <img src="{{ url_for('static', filename='resources/main - SJTU logo.png') }}" alt="LOGO" class="main-logo">
+      <a class="btn-border gen-hover">提交作品</a>
+    </div>
+
+    <div class="content">
+      <small>工导作品集合</small>
+      <h1>见识<br>无穷无尽的灵感</h1>
+      <a href="{{ url_for('main.discover') }}" class="btn-border gen-hover">我想看作品</a>
+    </div>
+
+    <div class="side-bar">
+      <img src="{{ url_for('static', filename='resources/main - menu.png') }}" alt="menu" class="menu-btn">
+
+      <div class="social-links">
+          <img src="{{ url_for('static', filename='resources/main - fb.png') }}" alt="facebook">
+          <img src="{{ url_for('static', filename='resources/main - ig.png') }}" alt="instagram">
+          <img src="{{ url_for('static', filename='resources/main - tw.png') }}" alt="twitter">
+      </div>
+      <div class="other-links">
+        <img src="{{ url_for('static', filename='resources/main - info.png') }}" alt="info">
+        <img src="{{ url_for('static', filename='resources/main - share.png') }}" alt="share">
+    </div>
+    </div>
+
+    <div class="bubbles">
+      <img src="{{ url_for('static', filename='resources/main - bubble.png') }}" alt="bubbles">
+      <img src="{{ url_for('static', filename='resources/main - bubble.png') }}" alt="bubbles">
+      <img src="{{ url_for('static', filename='resources/main - bubble.png') }}" alt="bubbles">
+      <img src="{{ url_for('static', filename='resources/main - bubble.png') }}" alt="bubbles">
+      <img src="{{ url_for('static', filename='resources/main - bubble.png') }}" alt="bubbles">
+      <img src="{{ url_for('static', filename='resources/main - bubble.png') }}" alt="bubbles">
+      <img src="{{ url_for('static', filename='resources/main - bubble.png') }}" alt="bubbles">
+    </div>
+  </div>
+{% endblock %}

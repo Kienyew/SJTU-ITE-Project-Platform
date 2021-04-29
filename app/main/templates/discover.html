@@ -1,0 +1,241 @@
+{% extends "general layout.html" %}
+
+{% block head %}
+  <script src="https://unpkg.com/scroll-out/dist/scroll-out.min.js"></script>  <!-- Scroll out library! -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/discover.css') }}" />
+{% endblock %}
+
+{% block title %}工导项目展示{% endblock %}
+
+{% block content %}
+  <!-- Headers and Navbar------------------------------------------------------------ -->
+  <div class="top-page">
+    <img src="{{ url_for('static', filename='resources/discover - background.jpg') }}" alt="background">
+    <div class="text-typewriter">
+      <h1 class="text-title">开始· <b>启程</b></h1>
+    </div>
+
+    <nav class="navbar">
+      <img src="{{ url_for('static', filename='resources/main - SJTU logo.png') }}" alt="LOGO" class="main-logo">
+      <div class="navbar-main-right">
+        <!-- Login and Logout button here, add btn-red attribute for logout -->
+        {#<a href="#" class="btn-border gen-hover btn-red">登出</a>#}
+        <a href="{{ url_for('user.login') }}" class="btn-border gen-hover">登入</a>
+        <a href="#" class="btn-border gen-hover">更多</a>
+      </div>
+    </nav>
+
+
+    <!-- TODO: Sidebar menu if possible -->
+    <div class="sidebar">
+      <h5>My App</h5>
+      <ul>
+        <li><a href="#"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TODO: Add some decoration or transition from top to discovery -->
+
+  <!-- TODO: dynamic grid -->
+  <!-- Gallery of photos -------------------------------------------------------------->
+  <div class="box-layout-grid">
+    <!-- BOX MAIN TEMPLATE -->
+    <div class="box" data-scroll>
+      <!-- Gonna link here to the project page -->
+      <div class="box-img-main">
+        <a href="#" >
+          <img src="Doesn't exist" alt="picture 1">
+          <!-- TODO: Maybe add image overlay and scale effect -->
+        </a>
+        <i class="fas fa-heart heart-vector"></i>
+      </div>
+      <div class="box-body">
+        <a href="#" class="box-title box-text-animation">很厉害的作品名字</a>
+        <div class="box-info-sub">
+          <h5 class="box-teammates">黄明志，周杰伦</h5>
+          <h5 class="box-date">21年4月10日</h5>
+        </div>
+        <div class="box-info-main">
+          <div>
+            <img class="box-icon-img" src="{{ url_for('static', filename='user resources/profile - 1.png') }}" alt="profile pic">
+            <a class="box-teamname box-text-animation" href="#">东方不败</a>
+          </div>
+          <div>
+            <h5 class="box-total-likes">100</h5>
+            <img class="box-icon-img" src="{{ url_for('static', filename='resources/discover - heart.png') }}" alt="love icon">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box" data-scroll>
+      <!-- Gonna link here to the project page -->
+      <div class="box-img-main">
+        <a href="#" >
+          <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="picture 1">
+          <!-- TODO: Maybe add image overlay and scale effect -->
+        </a>
+        <i class="fas fa-heart heart-vector"></i>
+      </div>
+      <div class="box-body">
+        <a href="#" class="box-title box-text-animation">很厉害的作品名字</a>
+        <div class="box-info-sub">
+          <h5 class="box-teammates">黄明志，周杰伦</h5>
+          <h5 class="box-date">2021年4月10日</h5>
+        </div>
+        <div class="box-info-main">
+          <div>
+            <img class="box-icon-img" src="{{ url_for('static', filename='user resources/profile - 1.png') }}" alt="profile pic">
+            <a class="box-teamname box-text-animation" href="#">东方不败</a>
+          </div>
+          <div>
+            <h5 class="box-total-likes">100</h5>
+            <img class="box-icon-img" src="{{ url_for('static', filename='resources/discover - heart.png') }}" alt="love icon">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box" data-scroll>
+      <!-- Gonna link here to the project page -->
+      <div class="box-img-main">
+        <a href="#" >
+          <img src="{{ url_for('static', filename='user resources/project - 1.jpg') }}" alt="picture 1">
+          <!-- TODO: Maybe add image overlay and scale effect -->
+        </a>
+        <i class="fas fa-heart heart-vector"></i>
+      </div>
+      <div class="box-body">
+        <a href="#" class="box-title box-text-animation">很厉害的作品名字</a>
+        <div class="box-info-sub">
+          <h5 class="box-teammates">黄明志，周杰伦</h5>
+          <h5 class="box-date">2021年4月10日</h5>
+        </div>
+        <div class="box-info-main">
+          <div>
+            <img class="box-icon-img" src="{{ url_for('static', filename='user resources/profile - 1.png') }}" alt="profile pic">
+            <a class="box-teamname box-text-animation" href="#">东方不败</a>
+          </div>
+          <div>
+            <h5 class="box-total-likes">100</h5>
+            <img class="box-icon-img" src="{{ url_for('static', filename='resources/discover - heart.png') }}" alt="love icon">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box" data-scroll>
+      <!-- Gonna link here to the project page -->
+      <div class="box-img-main">
+        <a href="#" >
+          <img src="pictures/project picture 2.jpg" alt="picture 1">
+          <!-- TODO: Maybe add image overlay and scale effect -->
+        </a>
+        <i class="fas fa-heart heart-vector"></i>
+      </div>
+      <div class="box-body">
+        <a href="#" class="box-title box-text-animation">很厉害的作品名字</a>
+        <div class="box-info-sub">
+          <h5 class="box-teammates">黄明志，周杰伦</h5>
+          <h5 class="box-date">2021年4月10日</h5>
+        </div>
+        <div class="box-info-main">
+          <div>
+            <img class="box-icon-img" src="{{ url_for('static', filename='user resources/profile - 2.png') }}" alt="profile pic">
+            <a class="box-teamname box-text-animation" href="#">西汉</a>
+          </div>
+          <div>
+            <h5 class="box-total-likes">100</h5>
+            <img class="box-icon-img" src="{{ url_for('static', filename='resources/discover - heart.png') }}" alt="love icon">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box" data-scroll>
+      <!-- Gonna link here to the project page -->
+      <div class="box-img-main">
+        <a href="#" >
+          <img src="pictures/project picture 1.jpg" alt="picture 1">
+          <!-- TODO: Maybe add image overlay and scale effect -->
+        </a>
+        <i class="fas fa-heart heart-vector"></i>
+      </div>
+      <div class="box-body">
+        <a href="#" class="box-title box-text-animation">很厉害的作品名字</a>
+        <div class="box-info-sub">
+          <h5 class="box-teammates">黄明志，周杰伦</h5>
+          <h5 class="box-date">2021年4月10日</h5>
+        </div>
+        <div class="box-info-main">
+          <div>
+            <img class="box-icon-img" src="{{ url_for('static', filename='user resources/profile - 1.png') }}" alt="profile pic">
+            <a class="box-teamname box-text-animation" href="#">东方不败</a>
+          </div>
+          <div>
+            <h5 class="box-total-likes">100</h5>
+            <img class="box-icon-img" src="{{ url_for('static', filename='resources/discover - heart.png') }}" alt="love icon">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- divider and footer ------------------------------------------------------- -->
+  <div class="pagination-line"></div>
+  <!-- Footer navigation bar -->
+  <nav class="navbar-4">
+    <ul class="pagination">
+      <a class="pagination-link" href="#">
+        <li class="pagination-item">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          上一页
+        </li>
+      </a>
+    </ul>
+
+    <ul class="pagination">
+      <li class="pagination-number active">
+        <a href="#">
+          1
+        </a>
+      </li>
+      <li class="pagination-number">
+        <a href="#">
+          2
+        </a>
+      </li>
+      <li class="pagination-number">
+        <a href="#">
+          3
+        </a>
+      </li>
+      <li class="pagination-number">
+        <a href="#">
+          4
+        </a>
+      </li>
+      <li class="pagination-number">
+        <a href="#">
+          5
+        </a>
+      </li>
+    </ul>
+
+    <ul class="pagination">
+      <a class="pagination-link" href="#" aria-label="Next">
+        <li class="pagination-item">
+          下一页
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </li>
+      </a>
+    </ul>
+  </nav>
+
+  <script>
+    ScrollOut();
+  </script>
+{% endblock %}
