@@ -5,6 +5,11 @@ from flask_login import UserMixin
 from .. import db
 from .. import login_manager
 
+like_registrations = db.Table('like_registrations',
+                              db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+                              db.Column('project_id', db.Integer, db.ForeignKey('projects.id'))
+                              )
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -13,6 +18,10 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(64), unique=True, index=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
     published_projects = db.relationship('Project', backref='publisher')
+    liked_projects = db.relationship('Project',
+                            secondary=like_registrations,
+                            backref=db.backref('liked_users', lazy='dynamic'),
+                            lazy='dynamic')
 
     def __repr__(self):
         return f'User({self.id}, {self.username}, {self.email})'
