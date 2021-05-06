@@ -8,9 +8,10 @@ from .security import verify_user_login, register_new_user
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
+    # TODO: requires email verification
     if current_user.is_authenticated:
         return redirect(url_for('main.discover'))
-    
+
     form = RegistrationForm()
     if not form.validate_on_submit():
         return render_template('register.html', form=form)
@@ -53,9 +54,9 @@ def logout():
 @user_blueprint.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
     # TODO: implement this together with automated email response
-    
+
     form = ForgetPassword()
     if not form.validate_on_submit():
         return render_template('forgot password.html', form=form)
-    
+
     return redirect(url_for('user.login'))
