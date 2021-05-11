@@ -11,7 +11,6 @@
   outline: none;
   text-decoration: none;
   list-style: none;
-  color: #fbfcfd;
 }
 
 html {
@@ -22,9 +21,9 @@ html {
 body {
   overscroll-behavior: none;
   font-size: 2.2rem;
-  font-family: "Kaiti SC Bold", cursive;
+  font-family: "apercu", sans-serif;
   font-weight: 300;
-  background-color: #e0eafc;
+  background-color: #F4F7F6;
 }
 
 /* General Effect ------------------------------------------------------------------------ */
@@ -53,9 +52,9 @@ body {
 
 /* Main Layout -------------------------------------------------------------------------------- */
 .main-layout {
+  background-image: url("../sources/home - background.png");
   width: 100%;
   height: 100vh;
-  background-image: url(../sources/home - background.png);
   background-size: cover;
   background-position: center;
   position: relative;
@@ -101,6 +100,8 @@ body {
 }
 
 .content {
+  font-family: "Kaiti SC Bold", cursive;
+  color: #fbfcfd;;
   position: absolute;
   top: 50%;
   left: 8%;
@@ -211,3 +212,130 @@ body {
   animation-delay: 4.6s;
   width: 3.9rem;
 }
+
+
+/* Pagination Footer ------------------------------------------------------------------------------------------------ */
+.pagination-line {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 0;
+  border-bottom: 0.1rem solid rgba(179, 179, 179, 0.5);
+}
+
+.navbar-4 {
+  max-width: 150rem;
+  padding: 2rem 2rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.pagination {
+  display: flex;
+}
+
+.pagination-number > a,
+.pagination-item {
+  font-size: 2rem;
+  color: #4b566b;
+  transition: 0.3s;
+}
+
+.pagination-item {
+  border-radius: 2rem;
+  word-spacing: 1rem;
+  padding: 0.6rem 1.6rem;
+}
+
+.pagination-item:hover,
+.pagination-number > a:hover {
+  background-color: rgba(78, 84, 200, 0.15);
+}
+
+.pagination-number > a {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 0.4rem;
+}
+
+.pagination-number.active > a {
+  background-color: #7694e9;
+  pointer-events: none;
+  color: white;
+  box-shadow: 0 0.5rem 1.4rem -0.425rem #5674c7;
+}
+
+
+/* For General Footer -------------------------------------------------------------------- */
+footer {
+  background: #FCFCFC;
+}
+
+.footer-container {
+  max-width: 150rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-list-title {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05rem;
+  font-weight: 500;
+}
+
+.footer-list-item > a {
+  color: rgb(129, 128, 128);
+  font-size: 1.5rem;
+  letter-spacing: 0.03rem;
+  opacity: 0.6;
+  margin-bottom: 0.8rem;
+  transition: 0.3s;
+}
+
+.footer-list-item:hover > a {
+  opacity: 1;
+}
+
+/* footer info ------------------------------------ */
+.footer-info {
+  padding: 2rem 3rem 4rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-info-left > .footer-list {
+  display: flex;
+}
+
+.footer-info-left > .footer-list > .footer-list-item {
+  margin-right: 3rem;
+}
+
+.footer-info-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* copyright reserve -------------------------------------------- */
+.copyright {
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.1rem;
+}
+
+.copyright > a {
+  opacity: 0.6;
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.8);
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+.copyright > a:hover {
+  opacity: 1;
+}
+

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/bf401d2f01.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style/main.css" />
+    <link rel="stylesheet" href="style/project.css" />
+    <link rel="shortcut icon" href="sources/SJTU.ico" type="image/x-icon" />
+    <title>工导项目展示</title>
+  </head>
+
+  <body>
+    <!-- TODO: Add header / navbar here ------------------------------------------------ -->
+    
+    <!-- Main Area ------------------------------------------------------------ -->
+    <div class="project-container">
+      <div class="project-header">
+        <div class="project-header-left">
+          <img class="project-header-icn header" src="sources/pp pic 1.png" alt="profile pic">
+          <div class="project-header-text">
+            <h2>发电自行车</h2>
+            <h4>组长 ｜ 组员1，组员2，组员3</h4>
+          </div>
+        </div>
+        <div class="project-header-right">
+          <h3><span id="like-count">1300</span> 人觉得这个想法很不错</h3>
+          <!-- toggle active class when adding this from Flask (provided if the user has liked before) -->
+          <button class="project-like-btn" id="like-btn" onclick="updateLike()">
+            喜欢 <i class="fas fa-heart"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="project-body">
+        <!-- Carousel View, support up to 4 pictures ------------------------------------------------------------ -->
+        <div class="project-image-gallery">
+          <div class="slider">
+            <div class="slides">
+              <!-- First is always checked, REMEMBER to update javascript total radio -->
+              <input type="radio" name="radio-btn" id="radio1" checked>
+              <input type="radio" name="radio-btn" id="radio2">
+              <input type="radio" name="radio-btn" id="radio3">
+
+              <!--slide images-->
+              <div class="slide first">
+                <img src="sources/project - pic 1.jpg" alt="pic 1">
+              </div>
+              <div class="slide">
+                <img src="sources/project - pic 2.jpg" alt="pic 2">
+              </div>
+              <div class="slide">
+                <img src="sources/project - pic 3.jpg" alt="pic 3">
+              </div>
+
+              <!--automatic navigation start-->
+              <div class="navigation-auto">
+                <div class="auto-btn1"></div>
+                <div class="auto-btn2"></div>
+                <div class="auto-btn3"></div>
+              </div>
+
+            </div>
+            <!--manual navigation start-->
+            <div class="navigation-manual">
+              <label for="radio1" class="manual-btn"></label>
+              <label for="radio2" class="manual-btn"></label>
+              <label for="radio3" class="manual-btn"></label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-description">
+            <p>月式事去律但观专如论话用布处，广且光去连E伴元析园难。 年京人次非青本米去究，再战般设3物时孤。</p>
+            <p>取较毛火分只，意较入教划，务W杨青。</p>
+            <p>基论革海者目外县厂，只就东候龙华列先，亲至U便边必完。 正意引复需王热委是，带道适9府辰。 照月类体接知知打影政为，人保老又金效至物间但取，算革D导芦便光族边。 接存斗格会所历适律始，很对立最属十达保管起，有生L节员号次基。 油观众众地劳无争名，面西但识成例值自值，好录活正形天定。</p>
+            <p>王的平去民具，关区究话业标，那1林财。 性就派如空每半安音，影科厂组复存观造理，在详建V状流可。</p>
+        </div>
+      </div>
+
+      <div class="project-footer">
+        <div class="project-avatar-container">
+          <span class="avatar-line"></span>
+          <img class="project-header-icn footer" src="sources/pp pic 1.png" alt="profile pic">
+          <span class="avatar-line"></span>
+        </div>
+        <h2 class="project-group-name">宇宙飞碟</h2>
+        <h4>一些关于我们这个组别的简介</h4>
+        <a href="#" class="project-contact-btn">
+          <i class="fas fa-envelope"></i> 联系我
+        </a>
+      </div>
+    </div>
+
+    <!-- footer -------------------------------------------------------------------------------------------- -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-info">
+          <div class="footer-info-left">
+            <ul class="footer-list">
+              <li class="footer-list-item"><a href="#"> 关于我们</a></li>
+              <li class="footer-list-item"><a href="#"> 协助开发</a></li>
+              <li class="footer-list-item"><a href="#"> 感谢</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-info-right">
+            <!-- Copyright reserved -->
+            <div class="copyright">
+              © 保留所有权利，由
+              <a href="#" target="_blank"> 上海交通大学学生</a> 制作
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="scripts/project script.js"></script>
+  </body>
+</html>

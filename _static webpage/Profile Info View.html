@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/bf401d2f01.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style/main.css" />
+    <link rel="stylesheet" href="style/update upload form.css" />
+    <link rel="shortcut icon" href="sources/SJTU.ico" type="image/x-icon" />
+    <title>工导项目个人资料</title>
+  </head>
+
+  <body>
+    <!-- TODO: Add header / navbar here ------------------------------------------------ -->
+    
+
+    <!-- Main Area ------------------------------------------------------------ -->
+    <div class="form-container">
+      <h3>修改个人消息</h3>
+
+      <form action="POST" class="main-form">
+        <!-- TODO: Randomize avatar icon each time user refresh/visit -->
+        <div class="form-group">
+          <label>选择你的头像（不要笑）</label>
+          <div class="form-avatars">
+            <!-- input value = the link to the icon -->
+            <label class="avatars">
+              <input type="radio" name="avatar"/>
+              <img src="sources/avatars/001-football.png" alt="avatar 1"/>
+            </label>
+            <label class="avatars">
+              <input type="radio" name="avatar"/>
+              <img src="sources/avatars/002-cyclist.png" alt="avatar 1"/>
+            </label>
+            <label class="avatars">
+              <input type="radio" name="avatar"/>
+              <img src="sources/avatars/003-cyclist-1.png" alt="avatar 1"/>
+            </label>
+            <label class="avatars">
+              <input type="radio" name="avatar"/>
+              <img src="sources/avatars/004-hockey.png" alt="avatar 1"/>
+            </label>
+            <label class="avatars">
+              <input type="radio" name="avatar"/>
+              <img src="sources/avatars/005-hockey-1.png" alt="avatar 1"/>
+            </label>
+            <label class="avatars">
+              <input type="radio" name="avatar"/>
+              <img src="sources/avatars/006-hockey-2.png" alt="avatar 1"/>
+            </label>
+            <label class="avatars">
+              <input type="radio" name="avatar"/>
+              <img src="sources/avatars/007-referee.png" alt="avatar 1"/>
+            </label>
+            <label class="avatars">
+              <input type="radio" name="avatar"/>
+              <img src="sources/avatars/008-swimmer.png" alt="avatar 1"/>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">新的用户名</label>
+          <input type="text" name="name" id="name" placeholder="新的名字" />
+        </div>
+        <div class="form-group">
+          <label for="old-password">现在的密码</label>
+          <input type="password" name="old-password" id="old-password" placeholder="一定要填"/>
+        </div>
+        <div class="form-group">
+          <label for="new-password">新的密码</label>
+          <input type="password" name="new-password" id="new-password" placeholder="如果不要改就不要填"/>
+        </div>
+        <div class="form-group">
+          <label for="con-password">确认新密码</label>
+          <input type="password" name="con-password" id="con-password" placeholder="如果不要改就不要填"/>
+        </div>
+
+        <div class="form-group">
+          <input type="submit" value="提交" class="form-submit-btn" />
+        </div>
+      </form>
+    </div>
+
+    <!-- footer -------------------------------------------------------------------------------------------- -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-info">
+          <div class="footer-info-left">
+            <ul class="footer-list">
+              <li class="footer-list-item"><a href="#"> 关于我们</a></li>
+              <li class="footer-list-item"><a href="#"> 协助开发</a></li>
+              <li class="footer-list-item"><a href="#"> 感谢</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-info-right">
+            <!-- Copyright reserved -->
+            <div class="copyright">
+              © 保留所有权利，由
+              <a href="#" target="_blank"> 上海交通大学学生</a> 制作
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

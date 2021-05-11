@@ -1,12 +1,11 @@
 /* TODO: Add media query if possible */
 body {
-  height: 100%;
   background: #F4F7F6;
 }
 
 /* Header, top */
 .top-page > img {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   object-fit: cover;
 }
@@ -14,7 +13,7 @@ body {
 .top-page {
   position: relative;
   overflow: hidden;
-  height: 100vh;
+  height: 70rem;
   width: 100%;
 }
 
@@ -38,6 +37,7 @@ body {
 }
 
 .text-title {
+  font-family: "Kaiti SC Bold", cursive;
   font-size: 7rem;
   color: rgba(224, 224, 224, 0.9);
   overflow: hidden;
@@ -77,7 +77,7 @@ body {
 /* Grid View ------------------------------------------------------------------ */
 .box-layout-grid {
   display: grid;
-  margin: 2.5rem auto;
+  margin: 7rem auto;
   padding: 0 4.5rem;
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   grid-gap: 2rem;
@@ -106,7 +106,6 @@ body {
   font-weight: 300;
   font-size: 1.7rem;
   letter-spacing: 0.09rem;
-  font-family: "apercu", sans-serif;
   color: #484949;
 }
 
@@ -185,10 +184,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   transition: 0.3s ease-in-out;
-}
-
-.heart-vector.checked {
-  color: rgb(185, 26, 26);
+  transition-property: opacity, color;
 }
 
 .box-img-main:hover .heart-vector {
@@ -196,9 +192,14 @@ body {
 }
 
 .box-img-main:hover .heart-vector:hover {
-  color: rgb(199, 53, 53);
+  color: rgb(228, 33, 33);
   opacity: 0.95;
 }
+
+.heart-vector.active {
+  color: rgb(199, 53, 53);
+}
+
 
 /* General scroll in effect ------------------------------------------------------- */
 [data-scroll] {
@@ -211,56 +212,4 @@ body {
 [data-scroll="out"] {
   opacity: 0;
   transform: translateY(7rem);
-}
-
-/* Footer ------------------------------------------------------------------------------------------------ */
-.pagination-line {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0.5rem 0;
-  border-bottom: 0.1rem solid rgba(179, 179, 179, 0.5);
-}
-
-
-.navbar-4 {
-  padding: 5rem 1rem 10rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 2rem;
-  font-family: "apercu", sans-serif;
-}
-
-.pagination {
-  display: flex;
-}
-
-.pagination-number > a,
-.pagination-item {
-  color: #4b566b;
-  transition: 0.3s;
-}
-
-.pagination-item {
-  border-radius: 2rem;
-  word-spacing: 1rem;
-  padding: 0.6rem 1.6rem;
-}
-
-.pagination-item:hover,
-.pagination-number > a:hover {
-  background-color: rgba(78, 84, 200, 0.15);
-}
-
-.pagination-number > a {
-  padding: 0.5rem 1rem;
-  margin: 0 0.5rem;
-  border-radius: 0.4rem;
-}
-
-.pagination-number.active > a {
-  background-color: #7694e9;
-  pointer-events: none;
-  color: white;
-  box-shadow: 0 0.5rem 1.4rem -0.425rem #5674c7;
 }

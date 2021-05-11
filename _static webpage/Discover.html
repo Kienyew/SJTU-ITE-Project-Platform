@@ -12,11 +12,11 @@
   </head>
 
   <body>
-    <!-- Headers and Navbar------------------------------------------------------------ -->
+    <!-- TODO: Headers and Navbar------------------------------------------------------------ -->
     <div class="top-page">
       <img src="sources/Discover Background.jpg" alt="background">
       <div class="text-typewriter">
-        <h1 class="text-title">开始· <b>启程</b></h1>
+        <h1 class="text-title">开始·<b>启程</b></h1>
       </div>
 
       <nav class="navbar">
@@ -50,7 +50,7 @@
             <img src="Doesn't exist" alt="picture 1">
             <!-- TODO: Maybe add image overlay and scale effect -->
           </a>
-          <i class="fas fa-heart heart-vector"></i>
+          <i class="fas fa-heart heart-vector" onclick="updateLike(this)"></i>
         </div>
         <div class="box-body">
           <a href="#" class="box-title box-text-animation">很厉害的作品名字</a>
@@ -78,7 +78,7 @@
             <img src="pictures/project placeholder.png" alt="picture 1">
             <!-- TODO: Maybe add image overlay and scale effect -->
           </a>
-          <i class="fas fa-heart heart-vector"></i>
+          <i class="fas fa-heart heart-vector" onclick="updateLike(this)"></i>
         </div>
         <div class="box-body">
           <a href="#" class="box-title box-text-animation">很厉害的作品名字</a>
@@ -106,7 +106,7 @@
             <img src="pictures/project picture 1.jpg" alt="picture 1">
             <!-- TODO: Maybe add image overlay and scale effect -->
           </a>
-          <i class="fas fa-heart heart-vector"></i>
+          <i class="fas fa-heart heart-vector" onclick="updateLike(this)"></i>
         </div>
         <div class="box-body">
           <a href="#" class="box-title box-text-animation">很厉害的作品名字</a>
@@ -134,7 +134,7 @@
             <img src="pictures/project picture 2.jpg" alt="picture 1">
             <!-- TODO: Maybe add image overlay and scale effect -->
           </a>
-          <i class="fas fa-heart heart-vector"></i>
+          <i class="fas fa-heart heart-vector" onclick="updateLike(this)"></i>
         </div>
         <div class="box-body">
           <a href="#" class="box-title box-text-animation">很厉害的作品名字</a>
@@ -162,7 +162,7 @@
             <img src="pictures/project picture 1.jpg" alt="picture 1">
             <!-- TODO: Maybe add image overlay and scale effect -->
           </a>
-          <i class="fas fa-heart heart-vector"></i>
+          <i class="fas fa-heart heart-vector" onclick="updateLike(this)"></i>
         </div>
         <div class="box-body">
           <a href="#" class="box-title box-text-animation">很厉害的作品名字</a>
@@ -237,9 +237,34 @@
     </nav>
   </div>
 
+
+<!-- footer -------------------------------------------------------------------------------------------- -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-info">
+      <div class="footer-info-left">
+        <ul class="footer-list">
+          <li class="footer-list-item"><a href="#"> 关于我们</a></li>
+          <li class="footer-list-item"><a href="#"> 协助开发</a></li>
+          <li class="footer-list-item"><a href="#"> 感谢</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-info-right">
+        <!-- Copyright reserved -->
+        <div class="copyright">
+          © 保留所有权利，由
+          <a href="#" target="_blank"> 上海交通大学学生</a> 制作
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
   </body>
 
   <script>
     ScrollOut();
   </script>
+  <script type="text/javascript" src="scripts/discover script.js"></script>
 </html>
