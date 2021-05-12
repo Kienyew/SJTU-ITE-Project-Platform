@@ -16,7 +16,7 @@ def like_project(id: int):
 
 @project_blueprint.route('/unlike_project/<int:id>', methods=['POST'])
 @login_required
-def like_project(id: int):
+def unlike_project(id: int):
     project = Project.query.get_or_404(id)
     current_user.liked_projects.remove(project)
     db.session.add(current_user._get_current_object())
