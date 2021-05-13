@@ -5,6 +5,10 @@ from flask_login import UserMixin
 from .. import db
 from .. import login_manager
 
+
+# Required for many-to-many relationship of database.
+# Contains data of like relationships between users and projects.
+# Allowing two-way references. ie: Project.liked_users and User.liked_projects
 like_registrations = db.Table('like_registrations',
                               db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
                               db.Column('project_id', db.Integer, db.ForeignKey('projects.id'))
@@ -27,4 +31,7 @@ class User(UserMixin, db.Model):
 
 @login_manager.user_loader
 def load_user(user_id: str) -> Optional[User]:
+    '''
+    A required function for Flask-Login module
+    '''
     return User.query.get(int(user_id))
