@@ -5,7 +5,6 @@ from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, Val
 from werkzeug.security import check_password_hash
 
 from .models import User
-import os
 
 # Form validation and models
 
@@ -66,11 +65,11 @@ class UpdateAccount(FlaskForm):
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first() or field.data and len(field.data) < 4:
             raise ValidationError('Username already taken or too short')
-        
+
     def validate_old_password(self, field):
         if not check_password_hash(current_user.password_hash, field.data):
             raise ValidationError('Wrong old Password')
-        
+
     def validate_new_password(self, field):
         if field.data and len(field.data) < 8:
             raise ValidationError('Password too short')

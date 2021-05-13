@@ -1,5 +1,4 @@
 from flask_migrate import Migrate
-from flask import current_app
 
 from config import Config
 from app.user.models import User

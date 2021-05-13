@@ -1,13 +1,14 @@
+import os
+import random
+from email_validator import validate_email, EmailNotValidError
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from email_validator import validate_email, EmailNotValidError
 
-from .. import db
 from . import user_blueprint
 from .forms import RegistrationForm, LoginForm, ForgetPassword, UpdateAccount
 from .models import User
-import random, os
+from .. import db
 
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
