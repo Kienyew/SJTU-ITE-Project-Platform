@@ -7,18 +7,17 @@
     <link rel="stylesheet" href="style/main.css" />
     <link rel="stylesheet" href="style/update upload form.css" />
     <link rel="shortcut icon" href="sources/SJTU.ico" type="image/x-icon" />
-    <title>工导项目个人资料</title>
+    <title>工导项目修改作品</title>
   </head>
 
   <body>
     <!-- TODO: Add header / navbar here ------------------------------------------------ -->
-    
 
     <!-- Main Area ------------------------------------------------------------ -->
     <div class="form-container">
       <h3>修改/提交作品</h3>
 
-      <form action="POST" class="main-form">
+      <form method="POST" class="main-form" enctype="multipart/form-data">
         <div class="form-group">
           <label for="group-name">组别名字</label>
           <input type="text" name="group-name" id="group-name" placeholder="" />

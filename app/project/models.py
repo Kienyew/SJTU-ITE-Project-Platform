@@ -2,17 +2,29 @@ from datetime import datetime
 from .. import db
 
 
-
 class Project(db.Model):
     __tablename__ = 'projects'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), index=True, nullable=False)
-    short_description = db.Column(db.Text)
+    
+    # From form ------------------------------------------------
+    team_name = db.Column(db.String(16), index=True, nullable=False)
+    team_description = db.Column(db.String(32), nullable=False)
+    teammates = db.Column(db.String(16), nullable=False)
+    project_name = db.Column(db.String(16), nullable=False)
+
+    project_pic1 = db.Column(db.String(70), nullable=False)  # 64 hex encoded project name
+    project_pic2 = db.Column(db.String(70))
+    project_pic3 = db.Column(db.String(70))
+    project_pic4 = db.Column(db.String(70))
+
+    project_description = db.Column(db.Text(120), nullable=False)
+    
+    # Other important attribute ---------------------------------------------
     publish_time = db.Column(db.DateTime, index=True, nullable=False, default=datetime.utcnow)
-    publisher_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    publisher_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     def __repr__(self):
-        return f'Project({self.id}, {self.name})'
+        return f'Project({self.id}, {self.team_name}, {self.project_description})'
 
     def get_liked_count(self) -> int:
         return self.liked_users.count()

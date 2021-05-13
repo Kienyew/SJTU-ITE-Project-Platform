@@ -1,0 +1,116 @@
+{% extends "general layout.html" %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/update&upload form.css') }}">
+{% endblock %}
+
+{% block title %}工导项目修改作品{% endblock %}
+
+{% block content %}
+<!-- TODO: Add header / navbar here ------------------------------------------------ -->
+
+<!-- Main Area ------------------------------------------------------------ -->
+<div class="form-container">
+  <h3>修改/提交作品</h3>
+
+  <form method="POST" class="main-form" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      <label for="team_name">组别名字</label>
+      {{ form.team_name() }}
+      {#<input type="text" name="group-name" id="group-name" placeholder="" />#}
+    </div>
+    <div class="form-group">
+      <label for="team_description">组别简介</label>
+      {{ form.team_description(placeholder="一群卷的厉害的学霸们") }}
+    </div>
+    <div class="form-group">
+      <label for="teammates">组员名字（以逗号隔开）</label>
+      {{ form.teammates(placeholder="不包含组长名") }}
+    </div>
+    <div class="form-group">
+      <label for="project_name">作品名字</label>
+      {{ form.project_name() }}
+    </div>
+
+    <div class="form-group">
+      <label>作品图片（至少要有一张图在第一格）</label>
+      <div class="form-pictures">
+        <div class="form-picture">
+          <label for="project_pic1" class="file-upload">
+            {{ form.project_pic1(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
+            <i class="fa fa-cloud-upload"></i> 上传
+          </label>
+          <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-1">
+        </div>
+        <div class="form-picture">
+          <label for="project_pic2" class="file-upload">
+            {{ form.project_pic2(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
+            <i class="fa fa-cloud-upload"></i> 上传
+          </label>
+          <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-2">
+        </div>
+        <div class="form-picture">
+          <label for="project_pic3" class="file-upload">
+            {{ form.project_pic3(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
+            <i class="fa fa-cloud-upload"></i> 上传
+          </label>
+          <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-3">
+        </div>
+        <div class="form-picture">
+          <label for="project_pic4" class="file-upload">
+            {{ form.project_pic4(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
+            <i class="fa fa-cloud-upload"></i> 上传
+          </label>
+          <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-4">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="project_description">作品简介</label>
+      {{ form.project_description(placeholder="让小伙伴们知道你的作品多牛", cols="30", rows="10") }}
+    </div>
+
+    <div class="form-group">
+      {{ form.submit(class="form-submit-btn", value="提交") }}
+    </div>
+  </form>
+</div>
+
+<!-- footer -------------------------------------------------------------------------------------------- -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-info">
+      <div class="footer-info-left">
+        <ul class="footer-list">
+          <li class="footer-list-item"><a href="#"> 关于我们</a></li>
+          <li class="footer-list-item"><a href="#"> 协助开发</a></li>
+          <li class="footer-list-item"><a href="#"> 感谢</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-info-right">
+        <!-- Copyright reserved -->
+        <div class="copyright">
+          © 保留所有权利，由
+          <a href="#" target="_blank"> 上海交通大学学生</a> 制作
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // For preview when select a picture to upload
+  function showPreview(event) {
+    const [file] = event.files
+    if (file) {  // if file exists
+      console.log(URL.createObjectURL(file));
+      console.log(event);
+      event.parentNode.parentNode.children[1].src = URL.createObjectURL(file);
+    }
+  }
+</script>
+{% endblock %}

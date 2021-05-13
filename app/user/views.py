@@ -8,7 +8,7 @@ from .security import verify_user_login, register_new_user
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
-    # TODO: requires email verification
+    # TODO: require email verification
     if current_user.is_authenticated:
         return redirect(url_for('main.discover'))
 
@@ -43,7 +43,7 @@ def login():
         return redirect(url_for('user.login'))
 
 
-@user_blueprint.route('/logout', methods=['POST'])
+@user_blueprint.route('/logout', methods=['GET'])
 @login_required
 def logout():
     logout_user()
