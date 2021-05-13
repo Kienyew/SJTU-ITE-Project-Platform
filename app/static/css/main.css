@@ -52,7 +52,7 @@ body {
 
 /* Main Layout -------------------------------------------------------------------------------- */
 .main-layout {
-  background-image: url("../sources/home - background.png");
+  background-image: var(--main-background-url);;
   width: 100%;
   height: 100vh;
   background-size: cover;

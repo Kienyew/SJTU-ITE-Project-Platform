@@ -18,6 +18,7 @@ like_registrations = db.Table('like_registrations',
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
+    user_avatar = db.Column(db.String(20), nullable=False, default='avatar 044.png')
     username = db.Column(db.String(64), unique=True, index=True, nullable=False)
     email = db.Column(db.String(64), unique=True, index=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)

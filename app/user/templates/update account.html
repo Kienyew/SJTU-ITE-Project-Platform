@@ -1,0 +1,79 @@
+{% extends "general layout.html" %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/update&upload form.css') }}">
+{% endblock %}
+
+{% block title %}修改个人消息{% endblock %}
+
+{% block content %}
+<!-- TODO: Add header / navbar here ------------------------------------------------ -->
+
+
+<!-- Main Area ------------------------------------------------------------ -->
+<div class="form-container">
+  <h3>修改个人消息</h3>
+
+  <form method="POST" class="main-form">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+      <label>选择你的头像（不要笑）</label>
+      <div class="form-avatars">
+        <!-- input value = the link to the icon -->
+        {% for avatar in form.avatars %}
+          <label class="avatars">
+            {{ avatar }}
+            <img src="{{ url_for('static', filename='resources/user avatars/' + avatar.data) }}" alt="{{ avatar.data }}"/>
+          </label>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="new_username">新的用户名</label>
+      {{ form.new_username(placeholder="新的名字") }}
+    </div>
+    <div class="form-group">
+      <label for="old_password">现在的密码</label>
+      {{ form.old_password(placeholder="一定要填") }}
+    </div>
+    <div class="form-group">
+      <label for="new_password">新的密码</label>
+      {{ form.new_password(placeholder="如果不要改就不要填") }}
+    </div>
+    <div class="form-group">
+      <label for="new_password_confirm">确认新密码</label>
+      {{ form.new_password_confirm(placeholder="如果不要改就不要填") }}
+    </div>
+
+    <div class="form-group">
+      {{ form.submit(class_="form-submit-btn", value="更新资料") }}
+    </div>
+  </form>
+</div>
+
+<!-- footer -------------------------------------------------------------------------------------------- -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-info">
+      <div class="footer-info-left">
+        <ul class="footer-list">
+          <li class="footer-list-item"><a href="#"> 关于我们</a></li>
+          <li class="footer-list-item"><a href="#"> 协助开发</a></li>
+          <li class="footer-list-item"><a href="#"> 感谢</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-info-right">
+        <!-- Copyright reserved -->
+        <div class="copyright">
+          © 保留所有权利，由
+          <a href="#" target="_blank"> 上海交通大学学生</a> 制作
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}
