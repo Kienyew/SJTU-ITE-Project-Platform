@@ -23,7 +23,15 @@ def register():
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-    # Login route & logic
+    """
+    Route for user login.
+
+    If the user has logged in, redirect it to the discover page.
+    If the user hasn't logged in:
+        If the request method is GET, send him the login page.
+        If the request method is POST, check whether the provided information is valid and redirect it to appropriate page.
+
+    """
     if current_user.is_authenticated:
         return redirect(url_for('main.discover'))
 
