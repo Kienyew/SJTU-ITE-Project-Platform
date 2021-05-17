@@ -1,0 +1,60 @@
+{% extends "general layout.html" %}
+
+{% block head %}
+  <script src="https://unpkg.com/scroll-out/dist/scroll-out.min.js"></script>  <!-- Scroll out library! -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/general information.css') }}" />
+{% endblock %}
+
+{% block title %}关于我们{% endblock %}
+
+
+{% block content %}
+{% include 'general header.html' %}
+
+<!-- Main Area ------------------------------------------------------------ -->
+<div class="information-container">
+    <div class="info-update">
+        <h2>
+            关于这个项目
+        </h2>
+        <p class="info-message">
+            我们是交大20届的学生，写一些东西写一些东西写一些东西写一些东西写一些东西写一些东西写一些东西写一些东西写一些东西写一些东西
+        </p>
+        <p class="info-message">
+            我觉得写这一个作品会对以后的学生会很有帮助，如果你对我们的作品感兴趣的话我们有把源代码<a href="https://github.com/Kienyew/SJTU-ITE-Project-Platform">开源在Github</a>上。
+        </p>
+    </div>
+    <div class="info-update">
+        <h2>
+            我们的组员？
+        </h2>
+        <p class="info-message">
+            歇一歇东西上
+        </p>
+        <p class="info-message">
+            xxxxxx
+        </p>
+    </div>
+    <div class="info-update" id="credit">
+        <h2>
+            致谢
+        </h2>
+        <p class="info-message">
+            感谢以下的资源让我们的项目得以实现：
+        </p>
+        <p class="info-message">
+            pexel
+        </p>
+        <p class="info-message">
+            unsplash
+        </p>
+        <p class="info-message">
+            Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        </p>
+    </div>
+</div>
+
+
+{% include 'general footer.html' %}
+{% endblock %}

@@ -19,13 +19,7 @@ def discover():
 
 @main_blueprint.route('/about')
 def about():
-    # TODO: About page
-    return render_template('discover.html')
-
-@main_blueprint.route('/credit')
-def credit():
-    # TODO: credit page
-    return render_template('discover.html')
+    return render_template('about.html')
 
 @main_blueprint.route('/error')
 def error():
