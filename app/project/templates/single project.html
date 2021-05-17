@@ -23,9 +23,21 @@
     <div class="project-header-right">
       <h3><span id="like-count">{{ project.get_liked_count() }}</span> 人觉得这个想法很不错</h3>
       <!-- toggle active class when adding this from Flask (provided if the user has liked before) -->
-      <button class="project-like-btn" id="like-btn" onclick="updateLike()">
-        喜欢 <i class="fas fa-heart"></i>
-      </button>
+      {% if current_user.is_authenticated %}
+        {% if project in current_user.liked_projects  %}
+          <button class="project-like-btn active" id="like-btn" onclick="updateLike({{ project.id }})">
+            喜欢 <i class="fas fa-heart"></i>
+          </button>
+        {% else %}
+          <button class="project-like-btn" id="like-btn" onclick="updateLike({{ project.id }})">
+            喜欢 <i class="fas fa-heart"></i>
+          </button>
+        {% endif %}
+      {% else %}
+        <button class="project-like-btn" id="like-btn" onclick="location.href='{{ url_for('user.login') }}'">
+          喜欢 <i class="fas fa-heart"></i>
+        </button>
+      {% endif %}
     </div>
   </div>
 
@@ -119,8 +131,44 @@
     </a>
   </div>
 </div>
+    <script>
 
-<script type="text/javascript" src="{{ url_for('static', filename='scripts/project script.js') }}"></script>
+    // Ajax call ------------------------------------------------------------------------------------
+    function updateLike(project_id) {
+      // Ajax call
+      fetch(`{{ url_for('project.toggle_like') }}/${project_id}`).then(function (response) {
+        return response.text();
+      }).then(function (text){
+        console.log(text);
+        // TODO: Do something here
+      })
+
+      // Instant feedback
+      const likeCount = document.getElementById('like-count');
+      const likeBtn = document.getElementById('like-btn');
+
+      if (likeBtn.classList.contains('active')) {
+        likeCount.innerHTML--;
+      }
+      else {
+        likeCount.innerHTML++;
+      }
+
+      likeBtn.classList.toggle('active');
+      // TODO: Add flush message here
+    }
+
+    // For Carousel
+    let counter = 1;
+    let totalSlides = document.querySelectorAll('.manual-btn').length;
+    setInterval(function(){
+      document.getElementById('radio' + counter).checked = true;
+      counter++;
+      if (counter > totalSlides) {
+        counter = 1;
+      }
+    }, 3000);  // Change slide every 3s
+  </script>
 {% include 'general footer.html' %}
 {% endblock %}
 

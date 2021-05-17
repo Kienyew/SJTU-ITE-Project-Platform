@@ -45,34 +45,31 @@ def post(id: int):
     return render_template('single project.html', project=project)
 
 
-@project_blueprint.route('/like_project/<int:id>', methods=['POST'])
+@project_blueprint.route('/toggle_like/', defaults={'id': -1})
+@project_blueprint.route('/toggle_like/<int:id>')
 @login_required
-def like_project(id: int):
+def toggle_like(id: int):
     """
-	Post to this route when a user like a project.
-	If the user has already liked the project before, it does nothing.
+	Post to this route when a user like/unlike a project.
+	If the user has already liked the project before, it will unlike the project.
 
 	Parameters:
 	id (int): Project id the user wanted to like
+	
+	Returns:
+	json response
     """
+    if id == -1:
+        return 'forbidden access', 403
+    print(f"THERE's request for toggling like for project:{id} from {current_user}")
     project = Project.query.get_or_404(id)
-    current_user.liked_projects.append(project)
+    if project in current_user.liked_projects:
+        current_user.liked_projects.remove(project)
+    else:
+        current_user.liked_projects.append(project)
+        
     db.session.add(current_user._get_current_object())
     db.session.commit()
+    return 'success', 200
 
 
-@project_blueprint.route('/unlike_project/<int:id>', methods=['POST'])
-@login_required
-def unlike_project(id: int):
-    """
-	Post to this route when a user unlike a project.
-	If the user have not liked the project before, it does nothing.
-
-
-	Parameters:
-	id (int): Project id the user wanted to unlike
-    """
-    project = Project.query.get_or_404(id)
-    current_user.liked_projects.remove(project)
-    db.session.add(current_user._get_current_object())
-    db.session.commit()

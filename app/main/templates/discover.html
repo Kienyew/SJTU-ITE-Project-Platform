@@ -181,8 +181,15 @@
             <img src="{{ url_for('static', filename='user resources/' + project.project_pic1) }}" alt="picture 1">
             <!-- TODO: Maybe add image overlay and scale effect -->
           </a>
-          {# TODO: Add like state #}
-          <i class="fas fa-heart heart-vector" onclick="updateLike(this)"></i>
+          {% if current_user.is_authenticated %}
+            {% if project in current_user.liked_projects  %}
+              <i class="fas fa-heart heart-vector active" onclick="updateLike(this, {{ project.id }})"></i>
+            {% else %}
+              <i class="fas fa-heart heart-vector" onclick="updateLike(this, {{ project.id }})"></i>
+            {% endif %}
+          {% else %}
+            <i class="fas fa-heart heart-vector" onclick="location.href='{{ url_for('user.login') }}'"></i>
+          {% endif %}
         </div>
         <div class="box-body">
           <a href="{{ url_for('project.post', id=project.id) }}" class="box-title box-text-animation">{{ project.project_name }}</a>
@@ -242,6 +249,42 @@
 
   <script>
     ScrollOut();
+
+
+    // Ajax call ------------------------------------------------------------------------------------
+    function updateLike(event, project_id) {
+      // Ajax call
+      fetch(`{{ url_for('project.toggle_like') }}/${project_id}`).then(function (response) {
+        return response.text();
+      }).then(function (text){
+        console.log(text);
+        // TODO: Do something here
+      })
+
+      // Instant feedback
+      const likeCount = event.parentNode.parentNode.querySelector('.box-total-likes');
+      const likeBtn = event;
+
+      if (likeBtn.classList.contains('active')) {
+        likeCount.innerHTML--;
+      }
+      else {
+        likeCount.innerHTML++;
+      }
+
+      likeBtn.classList.toggle('active');
+      // TODO: Add flush message here
+    }
+
+    // Parallax effect for background -------------------------------------------------------------------------------
+    document.addEventListener("mousemove", parallex);
+    function parallex(e) {
+      const obj = this.querySelector("#discover-background");
+      const speed = 3;  // Maybe randomize speed ?
+      const x = (window.innerWidth - e.pageX * speed) / 100;
+      const y = (window.innerHeight - e.pageY * speed) / 100;
+
+      obj.style.transform = `scale(1.1) translateX(${x}px) translateY(${y}px)`
+    }
   </script>
-  <script type="text/javascript" src="{{ url_for('static', filename='scripts/discover script.js') }}"></script>
 {% endblock %}
