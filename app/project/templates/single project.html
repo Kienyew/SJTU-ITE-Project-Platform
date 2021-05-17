@@ -158,16 +158,19 @@
       // TODO: Add flush message here
     }
 
-    // For Carousel
-    let counter = 1;
-    let totalSlides = document.querySelectorAll('.manual-btn').length;
-    setInterval(function(){
-      document.getElementById('radio' + counter).checked = true;
-      counter++;
-      if (counter > totalSlides) {
-        counter = 1;
-      }
-    }, 3000);  // Change slide every 3s
+    window.onload = function () {
+
+      // For Carousel
+      let counter = 1;
+      let totalSlides = document.querySelectorAll('.manual-btn').length;
+      setInterval(function(){
+          document.getElementById('radio' + counter).checked = true;
+          counter++;
+          if (counter > totalSlides) {
+            counter = 1;
+          }
+      }, 3000);  // Change slide every 3s
+    }
   </script>
 {% include 'general footer.html' %}
 {% endblock %}

@@ -87,7 +87,7 @@ def reset_password():
 def update_account():
     form = UpdateAccount()
     all_avatars = os.listdir("/Users/lunafreya/GitProjects/upgraded-happiness/app/static/resources/user avatars")
-    form.avatars.choices = [(avatar, avatar) for avatar in random.sample(all_avatars, k=8)]
+    form.avatars.choices = [(avatar, avatar) for avatar in random.sample(all_avatars, k=7)]
     # print(form.avatars.data, form.new_username.data, form.old_password.data)
     
     if form.validate_on_submit():

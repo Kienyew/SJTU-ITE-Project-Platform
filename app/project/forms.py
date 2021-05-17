@@ -10,10 +10,10 @@ class PublishProjectForm(FlaskForm):
     teammates = StringField('Teammates', validators=[DataRequired(), Length(1, 16)])
     project_name = StringField('Project name', validators=[DataRequired(), Length(1, 16)])
     
-    project_pic1 = FileField('Project pic 1', validators=[DataRequired(), FileAllowed(['jpg', 'jpeg', 'png'])])
-    project_pic2 = FileField('Project pic 2', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
-    project_pic3 = FileField('Project pic 3', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
-    project_pic4 = FileField('Project pic 4', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    project_pic1 = FileField('', validators=[DataRequired(), FileAllowed(['jpg', 'jpeg', 'png'])])
+    project_pic2 = FileField('', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    project_pic3 = FileField('', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    project_pic4 = FileField('', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     
     project_description = TextAreaField('Project description', validators=[DataRequired(), Length(1, 120)])
 

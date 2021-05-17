@@ -11,10 +11,13 @@ from ..utils import image
 @project_blueprint.route('/my_project', methods=['GET', 'POST'])
 @login_required
 def my_project():  # Submit new post or update existing post
-    # TODO: Check if user has previous post
     form = PublishProjectForm()
+    
     if form.validate_on_submit():
         pic_names = image.save_images(form)
+        # TODO: Implement delete picture from the server before updating + remove pic in frontend
+        # TODO: Fix front end data in picture form
+        # TODO: Currently new picture get overwritten over the old one, need to fix it
         post = Project(team_name=form.team_name.data,
                        team_description=form.team_description.data,
                        teammates=form.teammates.data,
@@ -32,7 +35,34 @@ def my_project():  # Submit new post or update existing post
         flash('Upload success')
         return redirect(url_for('main.discover'))
     
-    return render_template('submit project.html', form=form)
+    try:  # If exist previous data
+        project = current_user.published_projects[0]
+        print(project)
+        form.team_name.data = project.team_name
+        form.team_description.data = project.team_description
+        form.teammates.data = project.teammates
+        form.project_name.data = project.project_name
+        form.project_description.data = project.project_description
+        
+        # Pass as a dict because I can't make it work with changing label T_T
+        pic_data = {
+            "project_pic1": project.project_pic1,
+            "project_pic2": project.project_pic2,
+            "project_pic3": project.project_pic3,
+            "project_pic4": project.project_pic4
+        }
+        print(project.project_pic1 + '\n' +  # Debug
+              project.project_pic2 + '\n' +
+              project.project_pic3 + '\n' +
+              project.project_pic4)
+    except:
+        pic_data = {
+            "project_pic1": None,
+            "project_pic2": None,
+            "project_pic3": None,
+            "project_pic4": None
+        }
+    return render_template('submit project.html', form=form, pic_data=pic_data)
 
 
 @project_blueprint.route('/post/<int:id>', methods=['GET'])
@@ -67,9 +97,7 @@ def toggle_like(id: int):
         current_user.liked_projects.remove(project)
     else:
         current_user.liked_projects.append(project)
-        
+    
     db.session.add(current_user._get_current_object())
     db.session.commit()
     return 'success', 200
-
-

@@ -42,28 +42,44 @@
             {{ form.project_pic1(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
             <i class="fa fa-cloud-upload"></i> 上传
           </label>
-          <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-1">
+          {% if pic_data['project_pic1'] %}
+            <img src="{{ url_for('static', filename='user resources/' + pic_data['project_pic1']) }}" alt="project-img-1">
+          {% else %}
+            <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-1">
+          {% endif %}
         </div>
         <div class="form-picture">
           <label for="project_pic2" class="file-upload">
             {{ form.project_pic2(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
             <i class="fa fa-cloud-upload"></i> 上传
           </label>
-          <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-2">
+          {% if pic_data['project_pic2'] %}
+            <img src="{{ url_for('static', filename='user resources/' + pic_data['project_pic2']) }}" alt="project-img-2">
+          {% else %}
+            <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-2">
+          {% endif %}
         </div>
         <div class="form-picture">
           <label for="project_pic3" class="file-upload">
             {{ form.project_pic3(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
             <i class="fa fa-cloud-upload"></i> 上传
           </label>
-          <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-3">
+          {% if pic_data['project_pic3'] %}
+            <img src="{{ url_for('static', filename='user resources/' + pic_data['project_pic3']) }}" alt="project-img-3">
+          {% else %}
+            <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-3">
+          {% endif %}
         </div>
         <div class="form-picture">
           <label for="project_pic4" class="file-upload">
             {{ form.project_pic4(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
             <i class="fa fa-cloud-upload"></i> 上传
           </label>
-          <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-4">
+          {% if pic_data['project_pic4'] %}
+            <img src="{{ url_for('static', filename='user resources/' + pic_data['project_pic4']) }}" alt="project-img-4">
+          {% else %}
+            <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-4">
+          {% endif %}
         </div>
       </div>
     </div>

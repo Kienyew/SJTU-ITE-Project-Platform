@@ -21,6 +21,10 @@
       <label>选择你的头像（不要笑）</label>
       <div class="form-avatars">
         <!-- input value = the link to the icon -->
+        <label class="avatars">
+          <input type="radio" name="avatars" checked/>
+          <img src="{{ url_for('static', filename='resources/user avatars/' + current_user.user_avatar) }}" alt="{{ current_user.user_avatar }}"/>
+        </label>
         {% for avatar in form.avatars %}
           <label class="avatars">
             {{ avatar }}

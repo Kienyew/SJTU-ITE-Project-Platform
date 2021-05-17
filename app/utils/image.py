@@ -37,8 +37,8 @@ def save_images(form: forms.PublishProjectForm) -> List[str]:
 
             compress_and_save(i, save_path)
             filenames.append(new_name)
-        else:
-            filenames.append("")
+        # Ensure the picture is always store in sequential
 
     print("\n".join(filenames))
+    filenames = filenames if len(filenames) == 4 else filenames + ['' for _ in range(4 - len(filenames))]
     return filenames
