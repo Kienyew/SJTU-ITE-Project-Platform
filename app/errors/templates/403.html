@@ -1,0 +1,58 @@
+{% extends "general layout.html" %}
+
+{% block head %}
+  <script src="https://unpkg.com/scroll-out/dist/scroll-out.min.js"></script>  <!-- Scroll out library! -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}" />
+{% endblock %}
+
+{% block title %}403禁止错误{% endblock %}
+
+
+{% block content %}
+  {% include 'general header.html' %}
+
+  <!-- Main Area ------------------------------------------------------------ -->
+  <div class="full-screen">
+      <div class='container'>
+          <span class="error-num">4</span>
+          <div class='eye'></div>
+          <span class="error-num">3</span>
+
+          <p class="sub-text">你没有权限访问此资源！！回头是岸</p>
+          <a class="btn-border" href="{{ url_for('main.home') }}">回到主页</a>
+      </div>
+  </div>
+
+  {% include 'general footer.html' %}
+
+  <script>
+      function getOffset(element)
+      {
+          if (!element.getClientRects().length)
+          {
+              return { top: 0, left: 0 };
+          }
+
+          let rect = element.getBoundingClientRect();
+          let win = element.ownerDocument.defaultView;
+          return (
+              {
+                  top: rect.top + win.pageYOffset,
+                  left: rect.left + win.pageXOffset
+              });
+      }
+
+      document.addEventListener("mousemove", animateEye);
+      function animateEye(event) {
+          document.querySelectorAll(".eye").forEach(function (eye) {
+                  let x = (getOffset(eye).left) + (eye.clientWidth / 2);
+                  let y = (getOffset(eye).top) + (eye.clientHeight / 2);
+                  let rad = Math.atan2(event.pageX - x, event.pageY - y);
+                  let rot = (rad * (180 / Math.PI) * -1) + 180;
+                  eye.style.transform = `rotate(${rot}deg)`
+              }
+          );
+      }
+  </script>
+{% endblock %}
