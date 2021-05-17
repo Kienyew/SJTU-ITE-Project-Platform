@@ -1,7 +1,9 @@
+import re
+
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, RadioField
-from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, ValidationError, Optional
+from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo, ValidationError
 from werkzeug.security import check_password_hash
 
 from .models import User
@@ -41,7 +43,7 @@ class LoginForm(FlaskForm):
 class ForgetPassword(FlaskForm):
     email = StringField('Email address', validators=EMAIL_VALIDATORS)
     submit = SubmitField("Send reset request to my email")
-    
+
     def validate_email(self, email):
         if not User.query.filter_by(email=email.data).first():
             raise ValidationError("Email does not exist")
@@ -63,11 +65,18 @@ class UpdateAccount(FlaskForm):
     submit = SubmitField('Update')
 
     def validate_username(self, field):
-        if User.query.filter_by(username=field.data).first() or field.data and len(field.data) < 4:
+        # Keeps old username
+        if len(field.data) == 0:
+            return
+
+        if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already taken or too short')
+        elif len(field.data) < 4:
+            raise ValidationError('Username too short')
         elif len(field.data) > 63:
             raise ValidationError('Username too long')
-        # TODO: IMPORTANT, remember to add regex validator!
+        elif not re.match(r'^[a-zA-Z0-9_]+$', field.data):
+            raise ValidationError('Username can contains only latin characters and digits')
 
     def validate_old_password(self, field):
         if not check_password_hash(current_user.password_hash, field.data):
