@@ -1,0 +1,237 @@
+/* General layout */
+.project-container {
+  margin: 10rem auto;
+  max-width: 100rem;
+}
+
+.project-header-icn {
+  width: 5rem;
+  height: 5rem;
+}
+
+/* Project Top ---------------------------------------------------------------------------- */
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 4rem 7rem;
+}
+
+.project-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.project-header-text {
+  margin-left: 2rem;
+}
+
+.project-header-text h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.project-header-text h4 {
+  font-size: 1.6rem;
+  opacity: 0.65;
+  font-weight: 400;
+}
+
+.project-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.project-header-right h3 {
+  font-weight: 400;
+  opacity: 0.7;
+  font-size: 1.4rem;
+}
+
+#like-count {
+  opacity: 1;
+  font-weight: 900;
+}
+
+.project-like-btn {
+  color: #000000b7;
+  margin-left: 2rem;
+  border: none;
+  background-color: #dfdfdf;
+  border-radius: 0.8rem;
+  font-weight: 900;
+  font-size: 1.6rem;
+  padding: 1rem 1.6rem;
+  cursor: pointer;
+
+  transition: 0.4s;
+  transition-property: color, background-color;
+}
+
+.project-like-btn:hover {
+  color: #ffffff;
+  background-color: #b4b4bb;
+}
+
+.project-like-btn.active {
+  color: #fafafa;
+  background-color: #E32321;
+}
+
+/* Project Body ---------------------------------------------------------------------------- */
+.project-body {
+  padding: 4rem 7rem;
+}
+
+.project-image-gallery {
+  margin: 1rem 0 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider{
+  width: 80rem;
+  height: 50rem;
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.slides{
+  width: 500%;
+  height: 50rem;
+  display: flex;
+}
+
+.slides input{
+  display: none;
+}
+
+.slide{
+  width: 20%;
+  transition: 2s;
+}
+
+.slide img{
+  object-fit: cover;
+  width: 80rem;
+  height: 50rem;
+}
+
+/* manual & auto slide navigation ------------------------------ */
+.navigation-manual, .navigation-auto{
+  position: absolute;
+  width: 80rem;
+  display: flex;
+  justify-content: center;
+  margin-top: -4rem;
+}
+
+.navigation-auto{
+  margin-top: 46rem;
+}
+
+.manual-btn, .navigation-auto div{
+  border: 0.2rem solid #40D3DC;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: 1s;
+}
+
+.manual-btn:not(:last-child), .navigation-auto div:not(:last-child){
+  margin-right: 4rem;
+}
+
+.manual-btn:hover{
+  background: #40D3DC;
+}
+
+#radio1:checked ~ .first{
+  margin-left: 0;
+}
+
+#radio2:checked ~ .first{
+  margin-left: -20%;
+}
+
+#radio3:checked ~ .first{
+  margin-left: -40%;
+}
+
+#radio4:checked ~ .first{
+  margin-left: -60%;
+}
+
+/*automatic navigation ---------------------------------------- */
+#radio1:checked ~ .navigation-auto .auto-btn1,
+#radio2:checked ~ .navigation-auto .auto-btn2,
+#radio3:checked ~ .navigation-auto .auto-btn3,
+#radio4:checked ~ .navigation-auto .auto-btn4 {
+  background: #40D3DC;
+}
+
+/* Project text */
+.project-description {
+  text-indent: 3rem;
+  font-size: 1.8rem;
+}
+
+/* Project Bottom ---------------------------------------------------------------------------- */
+.project-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-avatar-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.project-header-icn.footer {
+  width: 7rem;
+  height: 7rem;
+}
+
+.avatar-line {
+  border: 1px solid #d1d1d3;
+  margin: 0;
+  width: 100%;
+  height: 0.1rem;
+  margin: 0 2rem;
+}
+
+.project-footer h2 {
+  font-size: 2.4rem;
+  margin-top: 2rem;
+}
+
+.project-footer h4 {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.project-contact-btn {
+  color: white;
+  border: none;
+  background-color: #E94D89;
+  border-radius: 0.8rem;
+  font-weight: 900;
+  font-size: 1.6rem;
+  padding: 1rem 1.6rem;
+  cursor: pointer;
+
+  transition:background-color 0.4s;
+}
+
+.project-contact-btn:hover {
+  background-color: #ff90ba;
+}
+
+.project-contact-btn.disabled {
+  
+}

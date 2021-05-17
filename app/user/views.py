@@ -103,6 +103,5 @@ def update_account():
         flash("Your account has been updated", 'success')
         return redirect(url_for('main.discover'))
     
-    # print(form.errors)
-    
+    print(form.errors) # DEBUG
     return render_template('update account.html', form=form)

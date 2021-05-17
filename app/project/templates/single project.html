@@ -1,0 +1,126 @@
+{% extends "general layout.html" %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}"/>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/project.css') }}">
+{% endblock %}
+
+{% block title %}工导作品{{ project.id }}{% endblock %}
+
+{% block content %}
+{% include 'general header.html' %}
+
+<!-- Main Area ------------------------------------------------------------ -->
+<div class="project-container">
+  <div class="project-header">
+    <div class="project-header-left">
+      <img class="project-header-icn header" src="{{ url_for('static', filename='resources/user avatars/' + project.publisher.user_avatar) }}" alt="profile pic">
+      <div class="project-header-text">
+        <h2>{{ project.project_name }}</h2>
+        <h4>{{ project.publisher.username }} ｜ {{ project.teammates }}</h4>
+      </div>
+    </div>
+    <div class="project-header-right">
+      <h3><span id="like-count">{{ project.get_liked_count() }}</span> 人觉得这个想法很不错</h3>
+      <!-- toggle active class when adding this from Flask (provided if the user has liked before) -->
+      <button class="project-like-btn" id="like-btn" onclick="updateLike()">
+        喜欢 <i class="fas fa-heart"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <!-- Carousel View, support up to 4 pictures ------------------------------------------------------------ -->
+    <div class="project-image-gallery">
+      <div class="slider">
+        <div class="slides">
+          <!-- First is always checked, REMEMBER to update javascript total radio -->
+          {# TODO: There's probably another efficient way of implementing the check function but I'm lazy #}
+          <input type="radio" name="radio-btn" id="radio1" checked>
+          {% if project.project_pic2 != '' %}
+            <input type="radio" name="radio-btn" id="radio2">
+          {% endif %}
+          {% if project.project_pic3 != '' %}
+            <input type="radio" name="radio-btn" id="radio3">
+          {% endif %}
+          {% if project.project_pic4 != '' %}
+            <input type="radio" name="radio-btn" id="radio4">
+          {% endif %}
+
+          <!--slide images-->
+          <div class="slide first">
+            <img src="{{ url_for('static', filename='user resources/' + project.project_pic1) }}" alt="pic 1">
+          </div>
+          {% if project.project_pic2 != '' %}
+            <div class="slide">
+              <img src="{{ url_for('static', filename='user resources/' + project.project_pic2) }}" alt="pic 2">
+            </div>
+          {% endif %}
+          {% if project.project_pic3 != '' %}
+            <div class="slide">
+              <img src="{{ url_for('static', filename='user resources/' + project.project_pic3) }}" alt="pic 3">
+            </div>
+          {% endif %}
+          {% if project.project_pic4 != '' %}
+            <div class="slide">
+              <img src="{{ url_for('static', filename='user resources/' + project.project_pic4) }}" alt="pic 4">
+            </div>
+          {% endif %}
+
+          <!--automatic navigation start-->
+          <div class="navigation-auto">
+            <div class="auto-btn1"></div>
+            {% if project.project_pic2 != '' %}
+              <div class="auto-btn2"></div>
+            {% endif %}
+            {% if project.project_pic3 != '' %}
+              <div class="auto-btn3"></div>
+            {% endif %}
+            {% if project.project_pic4 != '' %}
+              <div class="auto-btn4"></div>
+            {% endif %}
+          </div>
+
+        </div>
+        <!--manual navigation start-->
+        <div class="navigation-manual">
+          <label for="radio1" class="manual-btn"></label>
+          {% if project.project_pic2 != '' %}
+            <label for="radio2" class="manual-btn"></label>
+          {% endif %}
+          {% if project.project_pic3 != '' %}
+            <label for="radio3" class="manual-btn"></label>
+          {% endif %}
+          {% if project.project_pic4 != '' %}
+            <label for="radio4" class="manual-btn"></label>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="project-description">
+      {% for para in project.project_description.split('\n') %}
+        <p>{{ para }}</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="project-footer">
+    <div class="project-avatar-container">
+      <span class="avatar-line"></span>
+      <img class="project-header-icn footer" src="{{ url_for('static', filename='resources/user avatars/' + project.publisher.user_avatar) }}" alt="profile pic">
+      <span class="avatar-line"></span>
+    </div>
+    <h2 class="project-group-name">{{ project.team_name }}</h2>
+    <h4>{{ project.team_description }}</h4>
+    {# TODO: add email href jump#}
+    <a href="#" class="project-contact-btn">
+      <i class="fas fa-envelope"></i> 联系我
+    </a>
+  </div>
+</div>
+
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/project script.js') }}"></script>
+{% include 'general footer.html' %}
+{% endblock %}
+

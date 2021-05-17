@@ -1,5 +1,6 @@
-from flask import render_template
+from flask import render_template, request
 from . import main_blueprint
+from ..project.models import Project
 # This is the main entry, contain webpage with general purpose
 
 
@@ -12,12 +13,21 @@ def home():
 @main_blueprint.route('/discover')
 def discover():
     # Place to display projects
-    return render_template('discover.html')
+    page = request.args.get('page', 1, type=int)
+    projects = Project.query.order_by(Project.publish_time.desc()).paginate(page=page, per_page=5)  # projects / page
+    return render_template('discover.html', projects=projects)
 
+@main_blueprint.route('/about')
 def about():
     # TODO: About page
-    pass
+    return render_template('discover.html')
 
-def contact():
-    # TODO: Contact page
-    pass
+@main_blueprint.route('/credit')
+def credit():
+    # TODO: credit page
+    return render_template('discover.html')
+
+@main_blueprint.route('/error')
+def error():
+    # TODO: error page
+    return render_template('discover.html')

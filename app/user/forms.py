@@ -55,7 +55,7 @@ class ResetPasswordForm(FlaskForm):
 
 class UpdateAccount(FlaskForm):
     avatars = RadioField('Random avatar', choices=[], validate_choice=False)  # The choices are added dynamically
-    new_username = StringField('Username', validators=[Length(0, 64), Regexp('^[a-zA-Z0-9_]+$', message='Username can contains only latin characters and digits')])
+    new_username = StringField('Username', validators=[Length(0, 64)])
     old_password = PasswordField('Old Password', validators=PASSWORD_VALIDATORS)
     new_password = PasswordField('New Password', validators=[Length(0, 64)])
     new_password_confirm = PasswordField(
@@ -65,6 +65,9 @@ class UpdateAccount(FlaskForm):
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first() or field.data and len(field.data) < 4:
             raise ValidationError('Username already taken or too short')
+        elif len(field.data) > 63:
+            raise ValidationError('Username too long')
+        # TODO: IMPORTANT, remember to add regex validator!
 
     def validate_old_password(self, field):
         if not check_password_hash(current_user.password_hash, field.data):

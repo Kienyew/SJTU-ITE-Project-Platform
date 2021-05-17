@@ -9,39 +9,27 @@
 {% block title %}工导项目展示{% endblock %}
 
 {% block content %}
+  {% include 'general header.html' %}
   <!-- Headers and Navbar------------------------------------------------------------ -->
   <div class="top-page">
-    <img src="{{ url_for('static', filename='resources/discover - background.jpg') }}" alt="background">
+    <img id="discover-background" src="{{ url_for('static', filename='resources/discover - background.jpg') }}" alt="background">
+    <div class="top-page-shadow"></div>
+
     <div class="text-typewriter">
-      <h1 class="text-title">开始· <b>启程</b></h1>
+      <h1 class="text-title">开始·<b>启程</b></h1>
     </div>
 
-    <nav class="navbar">
-      <img src="{{ url_for('static', filename='resources/main - SJTU logo.png') }}" alt="LOGO" class="main-logo">
-      <div class="navbar-main-right">
-        <!-- Login and Logout button here, add btn-red attribute for logout -->
-        {% if current_user.is_authenticated %}
-          <a href="{{ url_for('user.logout') }}" class="btn-border gen-hover btn-red">登出</a>
-        {% else %}
-          <a href="{{ url_for('user.login') }}" class="btn-border gen-hover">登入</a>
-        {% endif %}
-        <a href="#" class="btn-border gen-hover">更多</a>
-      </div>
-    </nav>
+    <div class="text-subtitle">
+      <h3>下滑欣赏同学们的作品或提交你的作品</h3>
+    </div>
 
-
-    <!-- TODO: Sidebar menu if possible -->
-    <div class="sidebar">
-      <h5>My App</h5>
-      <ul>
-        <li><a href="#"></a></li>
-      </ul>
+    <div class="text-top-bottom">
+      <h6 class="text-top-bottom-idx1"><a href="https://github.com/Kienyew/SJTU-ITE-Project-Platform">上海交通学生</a>制作</h6>
+      <h6 class="text-top-bottom-idx2">关于<a href="{{ url_for('main.about') }}">我们</a></h6>
+      <h6 class="text-top-bottom-idx3">2021年工导课程项目作品</h6>
     </div>
   </div>
 
-  <!-- TODO: Add some decoration or transition from top to discovery -->
-
-  <!-- TODO: dynamic grid -->
   <!-- Gallery of photos -------------------------------------------------------------->
   <div class="box-layout-grid">
     <!-- BOX MAIN TEMPLATE -->
@@ -185,60 +173,75 @@
       </div>
     </div>
 
+    {# REAL DATA ---------------------------------------------------------------------------------------- #}
+    {% for project in projects.items %}
+      <div class="box" data-scroll>
+        <div class="box-img-main">
+          <a href="{{ url_for('project.post', id=project.id) }}" >
+            <img src="{{ url_for('static', filename='user resources/' + project.project_pic1) }}" alt="picture 1">
+            <!-- TODO: Maybe add image overlay and scale effect -->
+          </a>
+          {# TODO: Add like state #}
+          <i class="fas fa-heart heart-vector" onclick="updateLike(this)"></i>
+        </div>
+        <div class="box-body">
+          <a href="{{ url_for('project.post', id=project.id) }}" class="box-title box-text-animation">{{ project.project_name }}</a>
+          <div class="box-info-sub">
+            <h5 class="box-teammates">{{ project.teammates }}</h5>
+            <h5 class="box-date">{{ project.publish_time.strftime("%Y年%m月%d日") }}</h5>
+          </div>
+          <div class="box-info-main">
+            <div>
+              <img class="box-icon-img" src="{{ url_for('static', filename='resources/user avatars/' + project.publisher.user_avatar) }}" alt="profile pic">
+              <a class="box-teamname box-text-animation" href="{{ url_for('project.post', id=project.id) }}">{{ project.publisher.username }}</a>
+            </div>
+            <div>
+              <h5 class="box-total-likes">{{ project.get_liked_count() }}</h5>
+              <img class="box-icon-img" src="{{ url_for('static', filename='resources/discover - heart.png') }}" alt="like icon">
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
   </div>
+
 
   <!-- divider and footer ------------------------------------------------------- -->
   <div class="pagination-line"></div>
   <!-- Footer navigation bar -->
-  <nav class="navbar-4">
-    <ul class="pagination">
-      <a class="pagination-link" href="#">
-        <li class="pagination-item">
-          <i class="fas fa-chevron-left" aria-hidden="true"></i>
-          上一页
-        </li>
-      </a>
-    </ul>
+  <div class="post-navigation">
+    <ul>
+      {% if projects.has_prev %}
+      <li><a href="{{ url_for('main.discover', page=projects.page - 1) }}"><i class="fas fa-angle-left"></i> 上一页</a></li>
+      {% else %}
+      <li><a href="#" class="disabled"><i class="fas fa-angle-left"></i> 上一页</a></li>
+      {% endif %}
 
-    <ul class="pagination">
-      <li class="pagination-number active">
-        <a href="#">
-          1
-        </a>
-      </li>
-      <li class="pagination-number">
-        <a href="#">
-          2
-        </a>
-      </li>
-      <li class="pagination-number">
-        <a href="#">
-          3
-        </a>
-      </li>
-      <li class="pagination-number">
-        <a href="#">
-          4
-        </a>
-      </li>
-      <li class="pagination-number">
-        <a href="#">
-          5
-        </a>
-      </li>
-    </ul>
+      {% for page_num in projects.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+          {% if projects.page == page_num %}
+            <li><a href="{{ url_for('main.discover', page=page_num) }}" class="active">{{ page_num }}</a></li>
+          {% else %}
+            <li><a href="{{ url_for('main.discover', page=page_num) }}">{{ page_num }}</a></li>
+          {% endif %}
 
-    <ul class="pagination">
-      <a class="pagination-link" href="#" aria-label="Next">
-        <li class="pagination-item">
-          下一页
-          <i class="fas fa-chevron-right" aria-hidden="true"></i>
-        </li>
-      </a>
+        {% else %}
+        <li><a href="#">...</a></li>
+        {% endif %}
+      {% endfor %}
+
+      {% if projects.has_next %}
+      <li><a href="{{ url_for('main.discover', page=projects.page + 1) }}">下一页 <i class="fas fa-angle-right"></i></a></li>
+      {% else %}
+      <li><a href="#" class="disabled">下一页 <i class="fas fa-angle-right"></i></a></li>
+      {% endif %}
     </ul>
-  </nav>
+  </div>
+
+{% include 'general footer.html' %}
 
   <script>
     ScrollOut();
   </script>
+  <script type="text/javascript" src="{{ url_for('static', filename='scripts/discover script.js') }}"></script>
 {% endblock %}

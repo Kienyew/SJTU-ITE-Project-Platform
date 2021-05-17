@@ -37,7 +37,12 @@ def my_project():  # Submit new post or update existing post
 
 @project_blueprint.route('/post/<int:id>', methods=['GET'])
 def post(id: int):
-    pass
+    project = Project.query.filter_by(id=id).first_or_404()
+    print(project.project_pic1)  # DEBUG
+    print(project.project_pic2)
+    print(project.project_pic3)
+    print(project.project_pic4)
+    return render_template('single project.html', project=project)
 
 
 @project_blueprint.route('/like_project/<int:id>', methods=['POST'])

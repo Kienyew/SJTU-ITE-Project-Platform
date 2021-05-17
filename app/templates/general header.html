@@ -1,0 +1,27 @@
+<!-- Header ---------------------------------------------------------------------------------->
+<header class="main-header">
+  <div class="main-header-left">
+    <img src="{{ url_for('static', filename='resources/main - SJTU logo black.png') }}" alt="LOGO" class="main-logo">
+    <form method="post" class="search-form">
+      <label for="searchbar"><i class="fas fa-search"></i></label>
+      <input name="searchbar" id="searchbar" type="text" class="search-box" placeholder="输入关键字">
+    </form>
+  </div>
+
+  <div class="main-header-right">
+    {% if current_user.is_authenticated %}
+      <a href="{{ url_for('project.my_project') }}" class="main-square-btn">提交作品</a>
+      <div class="horizontal-divider"></div>
+      <a href="{{ url_for('main.home') }}" class="main-square-sub">回到主页</a>
+      <a href="{{ url_for('user.update_account') }}" class="main-square-sub">个人资料</a>
+      <!-- change between danger and main -->
+      <a href="{{ url_for('user.logout') }}" class="main-square-btn danger">登出</a>
+    {% else %}
+      <a href="{{ url_for('project.my_project') }}" class="main-square-btn">提交作品</a>
+      <div class="horizontal-divider"></div>
+      <a href="{{ url_for('user.login') }}" class="main-square-sub">登入</a>
+      <!-- change between danger and main -->
+      <a href="{{ url_for('user.register') }}" class="main-square-btn main">加入我们</a>
+    {% endif %}
+  </div>
+</header>

@@ -2,7 +2,7 @@
 .form-container {
   background-color: #f1f1f1;
   max-width: 60rem;
-  margin: 10rem auto;
+  margin: 15rem auto 10rem;
   padding:3rem;
   border-radius: 2rem;
   box-shadow: 0.5rem 0.4rem 3rem 1rem rgba(112, 112, 112, 0.329);

@@ -10,14 +10,14 @@
 {% endblock %}
 
 {% block title %}
-  工导项目展示
+  欢迎工导项目展示
 {% endblock %}
 
 {% block content %}
   <div class="main-layout">
     <div class="navbar">
       <img src="{{ url_for('static', filename='resources/main - SJTU logo.png') }}" alt="LOGO" class="main-logo">
-      <a class="btn-border gen-hover">提交作品</a>
+      <a href="{{ url_for('project.my_project') }}" class="btn-border gen-hover">提交作品</a>
     </div>
 
     <div class="content">

@@ -301,3 +301,48 @@
   opacity: 0;
   transform: translateY(7rem);
 }
+
+/* Pagination Footer ------------------------------------------------------------------------------------------------ */
+.pagination-line {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0.5rem 0;
+  border-bottom: 0.1rem solid rgba(179, 179, 179, 0.5);
+}
+
+.post-navigation {
+  margin: 3rem 0;
+}
+
+.post-navigation > ul {
+  display: flex;
+  justify-content: center;
+}
+
+.post-navigation a {
+  color: #6f6f6f;
+  padding: 1rem 1.5rem;
+  background-color: rgb(222, 222, 222);
+  border-radius: 0.5rem;
+  margin: 0 1rem;
+  transition: 0.4s;
+  font-weight: 400;
+  font-size: 1.8rem;
+}
+
+.post-navigation a:hover {
+  background-color: #b37575;
+  color: white;
+}
+
+.post-navigation a.active {
+  background-color: #A52A2A;
+  color: white;
+}
+
+.post-navigation a.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.4;
+}
+

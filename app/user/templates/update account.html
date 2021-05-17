@@ -8,8 +8,7 @@
 {% block title %}修改个人消息{% endblock %}
 
 {% block content %}
-<!-- TODO: Add header / navbar here ------------------------------------------------ -->
-
+{% include 'general header.html' %}
 
 <!-- Main Area ------------------------------------------------------------ -->
 <div class="form-container">
@@ -54,26 +53,5 @@
   </form>
 </div>
 
-<!-- footer -------------------------------------------------------------------------------------------- -->
-<footer>
-  <div class="footer-container">
-    <div class="footer-info">
-      <div class="footer-info-left">
-        <ul class="footer-list">
-          <li class="footer-list-item"><a href="#"> 关于我们</a></li>
-          <li class="footer-list-item"><a href="#"> 协助开发</a></li>
-          <li class="footer-list-item"><a href="#"> 感谢</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-info-right">
-        <!-- Copyright reserved -->
-        <div class="copyright">
-          © 保留所有权利，由
-          <a href="#" target="_blank"> 上海交通大学学生</a> 制作
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
+{% include 'general footer.html' %}
 {% endblock %}
