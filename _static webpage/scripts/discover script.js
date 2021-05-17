@@ -16,3 +16,14 @@ function updateLike(event) {
 
   likeBtn.classList.toggle('active');
 }
+
+
+document.addEventListener("mousemove", parallex);
+function parallex(e) {
+  const obj = this.querySelector("#discover-background");
+  const speed = 3;  // Maybe randomize speed ?
+  const x = (window.innerWidth - e.pageX * speed) / 100;
+  const y = (window.innerHeight - e.pageY * speed) / 100;
+
+  obj.style.transform = `scale(1.1) translateX(${x}px) translateY(${y}px)`
+}

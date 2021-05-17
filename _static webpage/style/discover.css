@@ -1,55 +1,57 @@
 /* TODO: Add media query if possible */
-body {
-  background: #F4F7F6;
-}
 
-/* Header, top */
-.top-page > img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
+/* top -------------------------------------------------------------------------------- */
 .top-page {
   position: relative;
   overflow: hidden;
-  height: 70rem;
+  height: 60rem;
   width: 100%;
 }
 
-.top-page > nav {
+.top-page img {
+  height: 100%;
   width: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
+}
+
+.top-page-shadow {
   position: absolute;
-  top: 3%;
-  padding: 0 5rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  background-color: rgba(0,0,0,0.2); /* Black background with opacity */
 }
 
-.navbar-main-right button:not(:last-child) {
-  margin-right: 2rem;
-}
 
 /* Text Effect ------------------------------------------------------------------------ */
 .text-typewriter {
   position: absolute;
-  top: 30%;
+  z-index: 2;
+  top: 33%;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .text-title {
   font-family: "Kaiti SC Bold", cursive;
-  font-size: 7rem;
-  color: rgba(224, 224, 224, 0.9);
+  font-size: 8.5rem;
   overflow: hidden;
-  border-right: 0.5rem solid rgb(117, 152, 247);
+  border-right: 0.5rem solid rgb(213, 222, 246);
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: 1.5rem;
+  color: rgba(237, 241, 252, 0.85);
   animation: typing 3.5s steps(30, end), blink-caret 0.5s step-end infinite;
 }
 
 .text-title b {
-  color: rgb(212, 234, 255);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* The typing effect */
@@ -72,6 +74,92 @@ body {
     /* Change the border color here */
     border-color: rgb(117, 152, 247);
   }
+}
+
+/* Subtitles and other miscellaneous top page -----------------------------------*/
+.text-subtitle {
+  position: absolute;
+  z-index: 2;
+  top: 65%;
+  color: #e5e4e4;
+  text-shadow: 0.1rem 0.1rem 0.3rem rgba(203, 227, 241, 0.43);
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, 0%);
+
+  opacity: 0;
+  animation: 2s ease-in-out slidein;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slidein {
+  from {
+    transform: translate(-50%, 6rem);
+    opacity: 0;
+  }
+  to   {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.text-top-bottom {
+  position: absolute;
+  z-index: 2;
+  bottom: 5%;
+  padding: 0 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #c7c7c7;
+}
+
+.text-top-bottom h6 {
+  color: rgba(236, 236, 236, 0.6);
+}
+
+.text-top-bottom h6 a {
+  color: rgba(255, 255, 255, 0.80);
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0);
+  transition: 0.3s;
+}
+
+.text-top-bottom h6 a:hover {
+  color: rgba(255, 255, 255, 1);
+  border-bottom: 0.1rem solid white;
+}
+
+@keyframes slidesmall {
+  from {
+    transform: translateY(-3rem);
+    opacity: 0;
+  }
+  to   {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text-top-bottom-idx1 {
+  opacity: 0;
+  animation: 2s ease-in-out slidesmall;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+}
+
+.text-top-bottom-idx2 {
+  opacity: 0;
+  animation: 2s ease-in-out slidesmall;
+  animation-delay: 2.7s;
+  animation-fill-mode: forwards;
+}
+
+.text-top-bottom-idx3 {
+  opacity: 0;
+  animation: 2s ease-in-out slidesmall;
+  animation-delay: 3.4s;
+  animation-fill-mode: forwards;
 }
 
 /* Grid View ------------------------------------------------------------------ */

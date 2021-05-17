@@ -12,33 +12,43 @@
   </head>
 
   <body>
-    <!-- TODO: Headers and Navbar------------------------------------------------------------ -->
+    <!-- Header ---------------------------------------------------------------------------------->
+    <header class="main-header">
+      <div class="main-header-left">
+        <img src="sources/SJTU LOGO black.png" alt="LOGO" class="main-logo">
+        <form method="post" class="search-form">
+          <label for="searchbar"><i class="fas fa-search"></i></label>
+          <input name="searchbar" id="searchbar" type="text" class="search-box" placeholder="输入关键字">
+        </form>
+      </div>
+
+      <div class="main-header-right">
+        <a href="#" class="main-square-btn">提交作品</a>
+        <div class="horizontal-divider"></div>
+        <a href="#" class="main-square-sub">登入</a>
+        <!-- change between danger and main -->
+        <a href="#" class="main-square-btn main">加入我们</a>
+      </div>
+    </header>
+
     <div class="top-page">
-      <img src="sources/Discover Background.jpg" alt="background">
+      <img src="sources/Discover Background.jpg" alt="background" id="discover-background">
+      <div class="top-page-shadow"></div>
+
       <div class="text-typewriter">
         <h1 class="text-title">开始·<b>启程</b></h1>
       </div>
 
-      <nav class="navbar">
-        <img src="sources/SJTU LOGO.png" alt="LOGO" class="main-logo">
-        <div class="navbar-main-right">
-          <!-- Login and Logout button here, add btn-red attribute for logout -->
-          <button type="button" class="btn-border gen-hover btn-red">登出</button>
-          <button type="button" class="btn-border gen-hover">更多</button>
-        </div>
-      </nav>
+      <div class="text-subtitle">
+        <h3>下滑欣赏同学们的作品或提交你的作品</h3>
+      </div>
 
-      
-      <!-- TODO: Sidebar menu if possible -->
-      <div class="sidebar">
-        <h5>My App</h5>
-        <ul>
-          <li><a href="#"></a></li>
-        </ul>
+      <div class="text-top-bottom">
+        <h6 class="text-top-bottom-idx1"><a href="#">上海交通学生</a>制作</h6>
+        <h6 class="text-top-bottom-idx2">关于<a href="#">我们</a></h6>
+        <h6 class="text-top-bottom-idx3">2021年工导课程项目作品</h6>
       </div>
     </div>
-
-    <!-- TODO: Add some decoration or transition from top to discovery -->
 
     <!-- Gallery of photos -------------------------------------------------------------->
     <div class="box-layout-grid">

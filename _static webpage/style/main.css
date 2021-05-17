@@ -23,7 +23,7 @@ body {
   font-size: 2.2rem;
   font-family: "apercu", sans-serif;
   font-weight: 300;
-  background-color: #F4F7F6;
+  background-color: #f6f6f6;
 }
 
 /* General Effect ------------------------------------------------------------------------ */
@@ -211,6 +211,130 @@ body {
 .bubbles img:nth-child(7) {
   animation-delay: 4.6s;
   width: 3.9rem;
+}
+
+/* General, fixed Header ---------------------------------------------------------------------------- */
+.main-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  height: 7rem;
+  padding: 0 1.6rem;
+  background: #FCFCFC;
+}
+
+.main-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.main-header-left img {
+  height: 100%;
+  width: auto;
+}
+
+.search-form {
+  margin-left: 4rem;
+}
+
+.search-form label {
+  position: absolute;
+  transform: translate(0.2rem, 1.4rem);
+  z-index: 1;
+  opacity: 0.4;
+  font-size: 1.5rem;
+}
+
+.search-box {
+  height: 4.5rem;
+  width: 50vw;
+  background: #EEEEEE;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
+  border-radius: 2rem;
+  padding: 1rem 2rem 1rem 4rem;
+  transform: translateX(-1.5rem);
+
+  transition: 0.4s;
+  transition-property: border, background-color;
+}
+
+.search-box:hover {
+  border: 0.1rem solid rgba(0, 0, 0, 0.7);
+}
+
+.search-box:focus {
+  border: 0.1rem solid rgba(0, 0, 0, 0.7);
+  background-color: #f8f8f8;
+}
+
+.main-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.main-square-btn {
+  color: #444343;
+  font-weight: 900;
+  border: 0.2rem solid #d1d1d1;
+  text-align: center;
+  border-radius: 0.6rem;
+  font-size: 1.6rem;
+  padding: 0.5rem 1.5rem;
+
+  transition: 0.3s;
+  transition-property: border, background-color;
+}
+
+.main-square-btn:hover {
+  border: 0.2rem solid #999999;
+  background-color: #eeeeee;
+}
+
+.horizontal-divider {
+  height: 2.5rem;
+  margin: 0 2rem;
+  opacity: 0.2;
+  border: 0.1rem solid black;
+}
+
+.main-square-sub {
+  color: #444343;
+  border: none;
+  font-weight: 900;
+  opacity: 0.75;
+  font-size: 1.6rem;
+  margin-right: 1.6rem;
+
+  transition: 0.3s;
+  transition-property: opacity;
+}
+
+.main-square-sub:hover {
+  opacity: 1;
+}
+
+.main-square-btn.main {
+  border: none;
+  color: white;
+  background-color: #3DB46E;
+}
+
+.main-square-btn.main:hover {
+  background-color: #317d50;
+}
+
+.main-square-btn.danger {
+  border: none;
+  color: white;
+  background-color: #F34436;
+}
+
+.main-square-btn.danger:hover {
+  background-color: #ba3d31;
 }
 
 
