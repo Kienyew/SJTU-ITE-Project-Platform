@@ -1,0 +1,92 @@
+/* information -------------------------------------------------------- */
+.information-container {
+    max-width: 80rem;
+    margin: 10rem auto 5rem;
+    padding: 4rem;
+}
+
+.info-update {
+    padding-bottom: 6rem;
+    margin-bottom: 6rem;
+    border-bottom: 0.1rem solid rgba(49, 49, 49, 0.123);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.info-update > h2 {
+    font-size: 3.5rem;
+    letter-spacing: 0.1rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.info-update > h2 > span {
+    margin-left: 2rem;
+    font-size: 1.9rem;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.info-message {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.1rem;
+    font-weight: 400;
+    color: rgb(100, 100, 100);
+    font-size: 1.8rem;
+}
+
+.info-message > a {
+    color: #03b5c8;
+    opacity: 0.8;
+    transition: 0.4s;
+    border-bottom: 0.1rem solid rgba(0,0,0,0);
+}
+
+.info-message > a:hover {
+    color: #16808b;
+    opacity: 0.9;
+    border-bottom: 0.1rem solid rgba(0, 0, 0, 0.34);
+}
+
+[class^="info-lbl"] {
+    color: white;
+    font-weight: 500;
+    border-radius: 1.5rem;
+    padding: 0.9rem 1.5rem;
+    margin: 1rem auto 1rem 0;
+}
+
+.info-lbl-success {
+    background-color: #00C851;
+    box-shadow: 0 0.4rem 0.8rem rgba(0,200,81,0.7);
+}
+
+.info-lbl-info {
+    background-color: #33b5e5;
+    box-shadow: 0 0.4rem 0.8rem rgba(51,181,229,0.7);
+}
+
+.info-lbl-danger {
+    background-color: #ff4444;
+    box-shadow: 0 0.4rem 0.8rem rgba(255,68,68,0.7);
+}
+
+.info-update > ul {
+    list-style-type: disc;
+    margin-left: 4rem;
+    margin-bottom: 1.8rem;
+}
+
+.info-update li {
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.05rem;
+}
+
+.info-update li > span {
+    font-weight: 700;
+    color: black;
+}
