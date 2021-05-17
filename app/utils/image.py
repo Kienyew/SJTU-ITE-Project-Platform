@@ -1,10 +1,14 @@
-import hashlib, os
+from flask import current_app
+from typing import List
+
+import hashlib
+import os
 from ..project import forms
 from PIL import Image
-from run import app  # TODO: BETTER solution to get root path to avoid circular import
 
 IMAGE_DESIRE_WIDTH = 1280  # Should probably put this inside a config file
 IMAGE_DESIRE_HEIGHT = 1920
+
 
 def compress_and_save(p_img: Image, save_path: str):
     if p_img.size[0] > IMAGE_DESIRE_WIDTH:
@@ -19,7 +23,7 @@ def compress_and_save(p_img: Image, save_path: str):
     # TODO: Add raise if error
 
 
-def save_images(form: forms.PublishProjectForm) -> [str]:
+def save_images(form: forms.PublishProjectForm) -> List[str]:
     filenames = []
     for data in [form.project_pic1.data, form.project_pic2.data, form.project_pic3.data, form.project_pic4.data]:
         if data:
@@ -27,13 +31,14 @@ def save_images(form: forms.PublishProjectForm) -> [str]:
             # Hash file data from stream to avoid naming collision
             f_name, f_ext = os.path.splitext(data.filename)
             new_name = hashlib.sha256(i.tobytes()).hexdigest() + f_ext
-            save_path = os.path.join(app.root_path, "static", "user resources", new_name)
-            print(f'Original : {f_name} + {f_ext}\n New name : {new_name}\n Save path : {save_path}')  # DEBUG
-            
+            save_path = os.path.join(current_app.root_path, "static", "user resources", new_name)
+            # DEBUG
+            print(f'Original : {f_name} + {f_ext}\n New name : {new_name}\n Save path : {save_path}')
+
             compress_and_save(i, save_path)
             filenames.append(new_name)
         else:
             filenames.append("")
-    
+
     print("\n".join(filenames))
     return filenames
