@@ -1,7 +1,7 @@
 import os
 import random
 from email_validator import validate_email, EmailNotValidError
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, current_app
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -25,7 +25,7 @@ def register():
     db.session.add(user)
     db.session.commit()
     flash('Successfully registered!')
-    
+
     return redirect(url_for('user.login'))
 
 
@@ -44,7 +44,7 @@ def login():
         return redirect(url_for('main.discover'))
 
     form = LoginForm()
-    
+
     if form.validate_on_submit():
         try:
             validate_email(form.email_or_username.data)
@@ -60,7 +60,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('main.discover'))
         else:
             flash('Invalid account or password')
-    
+
     return render_template('login.html', form=form)
 
 
@@ -86,10 +86,10 @@ def reset_password():
 @user_blueprint.route('/update_account', methods=['GET', 'POST'])
 def update_account():
     form = UpdateAccount()
-    all_avatars = os.listdir("/Users/lunafreya/GitProjects/upgraded-happiness/app/static/resources/user avatars")
+    all_avatars = os.listdir(os.path.join(current_app.root_path, 'static', 'resources', 'user avatars'))
     form.avatars.choices = [(avatar, avatar) for avatar in random.sample(all_avatars, k=7)]
     # print(form.avatars.data, form.new_username.data, form.old_password.data)
-    
+
     if form.validate_on_submit():
         # print("PASSED validation")
         if form.avatars.data:
@@ -98,10 +98,10 @@ def update_account():
             current_user.username = form.new_username.data
         if form.new_password.data:
             current_user.password_hash = generate_password_hash(form.new_password.data)
-        
+
         db.session.commit()
         flash("Your account has been updated", 'success')
         return redirect(url_for('main.discover'))
-    
+
     print(form.errors) # DEBUG
     return render_template('update account.html', form=form)
