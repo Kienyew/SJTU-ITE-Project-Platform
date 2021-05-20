@@ -11,6 +11,13 @@ IMAGE_DESIRE_HEIGHT = 1920
 
 
 def compress_and_save(p_img: Image, save_path: str):
+    """A helper function to compress a single image and save
+    
+    :param p_img: A pillow.Image object
+    :param save_path: full save path in string
+    :return: none (should probably return status)
+    """
+    
     if p_img.size[0] > IMAGE_DESIRE_WIDTH:
         w_percent = IMAGE_DESIRE_WIDTH / float(p_img.size[0])
         h_size = int(float(p_img.size[1]) * float(w_percent))
@@ -24,10 +31,9 @@ def compress_and_save(p_img: Image, save_path: str):
 
 
 def save_images(form: forms.PublishProjectForm) -> List[str]:
-    """
-    Wouldn't create new data if previous data exist, otherwise compress and save
+    """Ignore if previous data exist, otherwise compress and save
     
-    :param form:
+    :param form: forms.PublishProjectForm
     :return: always return a List[str] with four picture names inside  'static > user resources > <filename>'
     """
     
@@ -56,6 +62,13 @@ def save_images(form: forms.PublishProjectForm) -> List[str]:
 
 
 def delete_unused_image(form: forms.PublishProjectForm, old_images: [str]):
+    """A helper function to compare newly added images to old one and delete
+    
+    :param form: forms.PublishProjectForm
+    :param old_images: Array of image names
+    :return: none (should probably return status)
+    """
+    
     for new_image in [form.project_pic1.data, form.project_pic2.data, form.project_pic3.data, form.project_pic4.data]:
         if new_image and new_image.filename in old_images:
             old_images.remove(new_image.filename)

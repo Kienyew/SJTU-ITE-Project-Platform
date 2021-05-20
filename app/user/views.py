@@ -13,6 +13,11 @@ from .. import db
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
+    """A route for new user to register a new account
+    
+    :return: redirect to login page if successfully registered otherwise register page
+    """
+    
     # TODO: require email verification
     if current_user.is_authenticated:
         return redirect(url_for('main.discover'))
@@ -31,15 +36,15 @@ def register():
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-    """
-    Route for user login.
-
+    """A route for existing user to login
     If the user has logged in, redirect it to the discover page.
     If the user hasn't logged in:
         If the request method is GET, send him the login page.
         If the request method is POST, check whether the provided information is valid and redirect it to appropriate page.
 
+    :return: next page (if exist) / main.discover / login page
     """
+    
     if current_user.is_authenticated:
         return redirect(url_for('main.discover'))
 
@@ -64,9 +69,14 @@ def login():
     return render_template('login.html', form=form)
 
 
-@user_blueprint.route('/logout', methods=['GET'])
+@user_blueprint.route('/logout')
 @login_required
 def logout():
+    """A simple route to perform logout
+    
+    :return: redirect to main.home
+    """
+    
     logout_user()
     flash('You have been logged out')
     return redirect(url_for('main.home'))
@@ -74,6 +84,11 @@ def logout():
 
 @user_blueprint.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
+    """A route for user to reset their password if they have forgotten
+    
+    :return: user.login if success otherwise 'forgot_password' form
+    """
+    
     # TODO: implement this together with automated email response
 
     form = ForgetPassword()
@@ -85,6 +100,12 @@ def reset_password():
 
 @user_blueprint.route('/update_account', methods=['GET', 'POST'])
 def update_account():
+    """A route for existing user to update their account info,
+    it can be either username, avatar, password or all of them
+    
+    :return: update account form view / redirect to main.discover
+    """
+    
     form = UpdateAccount()
     all_avatars = os.listdir(os.path.join(current_app.root_path, 'static', 'resources', 'user avatars'))
     form.avatars.choices = [(avatar, avatar) for avatar in random.sample(all_avatars, k=7)]

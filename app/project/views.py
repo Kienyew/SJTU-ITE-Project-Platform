@@ -17,10 +17,10 @@ import os
 @project_blueprint.route('/my_project', methods=['GET', 'POST'])
 @login_required
 def my_project():
-    """
-    The main gateway for user to submit and update their post, update if exist or create if not
+    """The main gateway for user to submit and update their post
+    update if exist or create a new one if not
     
-    :return: redirect to main.discover if success otherwise return this page with error message
+    :return: redirect to main.discover if success otherwise return this page with an error message
     """
     
     # TODO: Fix paragraph tag wrapping issue + Better solution + delete pictures + file upload pre-populate solution
@@ -94,6 +94,11 @@ def my_project():
 
 @project_blueprint.route('/post/<int:id>', methods=['GET'])
 def post(id: int):
+    """Visitor can click on individual post in discovery webpage and redirect to here (single project view)
+    
+    :param id: primary id in the project field
+    :return: a single project webpage view
+    """
     project = Project.query.filter_by(id=id).first_or_404()
     print(project.project_pic1)  # DEBUG
     print(project.project_pic2)
@@ -106,15 +111,11 @@ def post(id: int):
 @project_blueprint.route('/toggle_like/<int:id>')
 @login_required
 def toggle_like(id: int):
-    """
-    Post to this route when a user like/unlike a project.
+    """Post to this route when a user like/unlike a project.
     If the user has already liked the project before, it will unlike the project.
-
-    Parameters:
-    id (int): Project id the user wanted to like
     
-    Returns:
-    json response
+    :param id: The primary key in Project model
+    :return: json response with http status
     """
     if id == -1:
         return 'forbidden access', 403
@@ -132,6 +133,11 @@ def toggle_like(id: int):
 
 @project_blueprint.route('/generate_dummies')
 def generate_dummies():
+    """A route created only for testing purpose, should NEVER be used in real production environment
+    
+    :return: redirect to main.discover after generating dummies data
+    """
+    
     if not current_app.config['USER_DEBUG_MODE']:  # Prevent unauthorised access
         abort(403)
     

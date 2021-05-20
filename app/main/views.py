@@ -18,7 +18,7 @@ def home():
 def discover():
     """Display projects in grid view, sorting results from the newest to the oldest
     
-    :return: discover.html if normal get, otherwise return search query from post request
+    :return: discover webpage
     """
     
     page = request.args.get('page', 1, type=int)
@@ -29,13 +29,13 @@ def discover():
 @main_blueprint.route('/search/', defaults={'query': ''}, methods=['POST', 'GET'])
 @main_blueprint.route('/search/<string:query>', methods=['POST', 'GET'])
 def search(query: str):
-    """Simple search engine that search in ['team_name', 'project_description', 'project_name'] fields
+    """Simple search engine that search in Project ['team_name', 'project_description', 'project_name'] fields
     
-    :param query: the keyword for search engine to search
-    :return: search result display in discover webpage
+    :param query: the keyword for search engine to perform search
+    :return: search result display in discover webpage layout
     """
     
-    print(f"Searching for: {query}")
+    print(f"Searching for: {query}")  # Debug
     page = request.args.get('page', 1, type=int)
     projects = Project.query.msearch(query).order_by(Project.publish_time.desc()).paginate(page=page, per_page=current_app.config['POSTS_PER_PAGE'])
     
@@ -44,7 +44,7 @@ def search(query: str):
 
 @main_blueprint.route('/about')
 def about():
-    """A page for us to write about our motive, ourselves and credits
+    """A page for us to write about our motive, plans and credits
     
     :return: about.html
     """
