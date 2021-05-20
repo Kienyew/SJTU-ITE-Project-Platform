@@ -2,12 +2,14 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
+from flask_msearch import Search
 
 from config import Config
 
 
 db = SQLAlchemy()
 bootstrap = Bootstrap()
+search = Search()
 login_manager = LoginManager()
 login_manager.login_view = 'user.login'
 
@@ -19,6 +21,7 @@ def create_app(config: Config):
     db.init_app(app)
     bootstrap.init_app(app)
     login_manager.init_app(app)
+    search.init_app(app)
 
     from .main import main_blueprint
     from .user import user_blueprint

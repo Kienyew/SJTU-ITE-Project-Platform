@@ -14,6 +14,7 @@ class Config:
     
     # User Global configuration (should probably split this into different class in the future --------------------
     USER_DEBUG_MODE = True  # REMEMBER to turn this off during real production
-    IMAGE_DESIRE_WIDTH = 1280
-    IMAGE_DESIRE_HEIGHT = 1920
+    POSTS_PER_PAGE = 9
+    IMAGE_COMPRESSION_DESIRE_WIDTH = 1280
+    IMAGE_COMPRESSION_DESIRE_HEIGHT = 1920
 

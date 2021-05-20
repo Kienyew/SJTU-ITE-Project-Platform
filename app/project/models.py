@@ -4,6 +4,7 @@ from .. import db
 
 class Project(db.Model):
     __tablename__ = 'projects'
+    __searchable__ = ['team_name', 'project_description', 'project_name']
     id = db.Column(db.Integer, primary_key=True)
     
     # From form ------------------------------------------------

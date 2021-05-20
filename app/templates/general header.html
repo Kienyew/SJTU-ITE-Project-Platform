@@ -1,8 +1,8 @@
 <!-- Header ---------------------------------------------------------------------------------->
 <header class="main-header">
   <div class="main-header-left">
-    <img src="{{ url_for('static', filename='resources/main - SJTU logo black.png') }}" alt="LOGO" class="main-logo">
-    <form method="post" class="search-form">
+    <img src="{{ url_for('static', filename='resources/main - SJTU logo black.png') }}" alt="LOGO" class="main-logo" onclick="window.location.href = '{{ url_for('main.discover') }}'">
+    <form method="post" class="search-form" onsubmit="window.location.href = '{{ url_for('main.search') }}' + searchbar.value; return false;">
       <label for="searchbar"><i class="fas fa-search"></i></label>
       <input name="searchbar" id="searchbar" type="text" class="search-box" placeholder="输入关键字">
     </form>

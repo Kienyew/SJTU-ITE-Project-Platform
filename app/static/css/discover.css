@@ -162,6 +162,125 @@
   animation-fill-mode: forwards;
 }
 
+/* Star effects -------------------------------------------------------------------------------------------- */
+.star-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
+  height: 100%;
+}
+
+.shiny-star {
+  position: absolute;
+  width: 0.4rem;
+  height: 0.4rem;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.4rem rgba(255,255,255, 0.1), 0 0 0 0.8rem rgba(255,255,255, 0.1), 0 0 1.5rem 1.5rem rgba(255,255,255, 0.3);
+  animation: shooting-stars 3s ease-out infinite;
+}
+
+.shiny-star:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25rem;
+  height: 0.1rem;
+  background: linear-gradient(90deg, white, transparent);
+}
+
+@keyframes shooting-stars {
+  0% {
+    transform: rotate(315deg) translateX(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(315deg) translateX(-100rem);
+  }
+}
+
+.shiny-star:nth-child(1) {
+  top: 0;
+  right: 0;
+  left: initial;
+  animation-delay: 0s;
+  animation-duration: 2s;
+}
+.shiny-star:nth-child(2) {
+  top: -2%;
+  right: 10%;
+  left: initial;
+  animation-delay: 0.2s;
+  animation-duration: 2.6s;
+}
+.shiny-star:nth-child(3) {
+  top: -5%;
+  right: -20%;
+  left: initial;
+  animation-delay: 0.4s;
+  animation-duration: 2s;
+}
+.shiny-star:nth-child(4) {
+  top: 0;
+  right: 60%;
+  left: initial;
+  animation-delay: 0.1s;
+  animation-duration: 1.8s;
+}
+.shiny-star:nth-child(5) {
+  top: 5%;
+  right: 50%;
+  left: initial;
+  animation-delay: 0.5s;
+  animation-duration: 2.3s;
+}
+.shiny-star:nth-child(5) {
+  top: 2%;
+  right: 80%;
+  left: initial;
+  animation-delay: 0.5s;
+  animation-duration: 2.9s;
+}
+.shiny-star:nth-child(6) {
+  top: 5%;
+  right: 35%;
+  left: initial;
+  animation-delay: 0.7s;
+  animation-duration: 3.6s;
+}
+.shiny-star:nth-child(7) {
+  top: 2%;
+  right: 50%;
+  left: initial;
+  animation-delay: 0.6s;
+  animation-duration: 3.9s;
+}
+.shiny-star:nth-child(8) {
+  top: 15%;
+  right: 0;
+  left: initial;
+  animation-delay: 0.2s;
+  animation-duration: 1.3s;
+}
+.shiny-star:nth-child(9) {
+  top: 5%;
+  right: 40%;
+  left: initial;
+  animation-delay: 0.6s;
+  animation-duration: 3s;
+}
+
 /* Grid View ------------------------------------------------------------------ */
 .box-layout-grid {
   display: grid;
