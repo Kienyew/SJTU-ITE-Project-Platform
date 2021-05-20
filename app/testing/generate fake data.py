@@ -7,10 +7,11 @@ import random
 import pandas as pd
 import os
 
-# Preparation --------------------------------------------------------------------------------------------------------
-
-NUMS_ACCOUNT = 10
+# Configuration
+NUMS_ACCOUNT = 20
 EMAIL_DOMAIN = ["gmail", "yahoo", "hotmail"]
+
+# Preparation --------------------------------------------------------------------------------------------------------
 with open('random name.txt') as f:
     chinese_names = f.read().splitlines()
 with open('random project name.txt') as f:
@@ -39,11 +40,14 @@ output_project_description = []
 output_project_date = []
 
 # Main algorithm ------------------------------------------------------------------------------------------------
-
 for _ in range(NUMS_ACCOUNT):
     username = random.choice(chinese_names)
+    if username in output_usernames:
+        continue  # for UNIQUENESS
     user_avatar = f'avatar {random.randint(1, 99):03}.png'
     email = faker.name().replace(" ", "") + "@" + random.choice(EMAIL_DOMAIN) + ".com"
+    if email in output_emails:
+        continue
     password = "".join(secrets.choice(ALPHABET) for i in range(10))
 
     teammates = []
@@ -52,7 +56,7 @@ for _ in range(NUMS_ACCOUNT):
     
     project_pictures = []
     for _ in range(random.randint(1, 4)):
-        project_pictures.append(random.choice(testing_pictures))
+        project_pictures.append("testing/" + random.choice(testing_pictures))
 
     project_description = []
     for _ in range(random.randint(3, 6)):
@@ -71,14 +75,13 @@ for _ in range(NUMS_ACCOUNT):
     output_project_date.append(random_date_between(datetime.date(2018, 1, 2), datetime.date(2021, 12, 24)))
 
 # Output configuration -------------------------------------------------------------------------------------------------
-
 fake_data = {
     "username": output_usernames,
     "user_avatar": output_user_avatar,
     "email": output_emails,
     "password": output_passwords,
     
-    "team_names": output_team_names,
+    "team_name": output_team_names,
     "team_description": output_team_description,
     "teammates": output_teammates,
     "project_name": output_project_name,

@@ -51,7 +51,7 @@ def save_images(form: forms.PublishProjectForm) -> List[str]:
             # Ensure the picture is always store in sequential
 
     print("\n".join(filenames))
-    filenames = filenames if len(filenames) == 4 else filenames + ['' for _ in range(4 - len(filenames))]
+    filenames = filenames + ['' for _ in range(len(filenames), 4)]  # Ensure the return length is always 4
     return filenames
 
 

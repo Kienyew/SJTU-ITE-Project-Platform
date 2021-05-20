@@ -1,3 +1,4 @@
+from werkzeug.security import generate_password_hash
 from flask import render_template, url_for, redirect, flash, current_app, abort
 from flask_login import login_required, current_user
 
@@ -5,7 +6,12 @@ from .. import db
 from .forms import PublishProjectForm
 from . import project_blueprint
 from .models import Project
+from ..user.models import User
 from ..utils import image
+import pandas as pd
+from ast import literal_eval
+from datetime import datetime
+import os
 
 
 @project_blueprint.route('/my_project', methods=['GET', 'POST'])
@@ -18,14 +24,18 @@ def my_project():
     """
     
     # TODO: Fix paragraph tag wrapping issue + Better solution + delete pictures + file upload pre-populate solution
+    
     form = PublishProjectForm()
     
     if form.validate_on_submit():
         try:  # If exist previous data
             project = current_user.published_projects[0]
-            image.delete_unused_image(form, [project.project_pic1, project.project_pic2, project.project_pic3, project.project_pic4])
+            image.delete_unused_image(form, [project.project_pic1, project.project_pic2, project.project_pic3,
+                                             project.project_pic4])
+            has_previous = True
         except:  # Create new if old one doesn't exist
             project = Project()
+            has_previous = False
         pic_names = image.save_images(form)  # Compress and save
         
         project.team_name = form.team_name.data
@@ -39,6 +49,8 @@ def my_project():
         project.project_description = form.project_description.data
         project.publisher = current_user
         
+        if not has_previous:
+            db.session.add(project)
         db.session.commit()
         
         flash('Upload success')
@@ -76,7 +88,7 @@ def my_project():
             "project_pic3": None,
             "project_pic4": None
         }
-        
+    
     return render_template('submit project.html', form=form, pic_data=pic_data)
 
 
@@ -118,13 +130,41 @@ def toggle_like(id: int):
     return 'success', 200
 
 
-@project_blueprint.route('/toggle_like/', defaults={'id': -1})
-@project_blueprint.route('/toggle_like/<int:id>')
-def generate_dummy():
-    if not current_app.config['USER_DEBUG_MODE']:
+@project_blueprint.route('/generate_dummies')
+def generate_dummies():
+    if not current_app.config['USER_DEBUG_MODE']:  # Prevent unauthorised access
         abort(403)
-
-    # TODO: Generate testing data
-
+    
+    users = []
+    projects = []
+    
+    fake_data = pd.read_csv(os.path.join(current_app.root_path, 'testing', 'fake_data.csv'))
+    for row in fake_data.itertuples():
+        user = User(email=row.email, user_avatar=row.user_avatar, username=row.username,
+                    password_hash=generate_password_hash(row.password))
+        print(f'Generating user: \n  Email:{row.email}\n  Name:{row.username}\n  Password:{row.password}')
+        project_pictures = literal_eval(row.project_pictures)
+        project_pictures = project_pictures + ['' for _ in range(len(project_pictures), 4)]
+        print(f'  Pictures: {project_pictures}')
+        project = Project(
+            team_name=row.team_name,
+            team_description=row.team_description,
+            teammates=",".join(literal_eval(row.teammates)),
+            project_name=row.project_name,
+            project_pic1=project_pictures[0],
+            project_pic2=project_pictures[1],
+            project_pic3=project_pictures[2],
+            project_pic4=project_pictures[3],
+            project_description="\n".join(literal_eval(row.project_description)),
+            publisher=user,
+            publish_time=datetime.strptime(row.project_date, '%Y-%m-%d')
+        )
+        
+        users.append(user)
+        projects.append(project)
+    
+    db.session.add_all(users + projects)
+    db.session.commit()
+    # TODO: Randomize like
     print("WARNING!!! Only use this for testing purpose")
-    return redirect(url_for('home.discover'))
+    return redirect(url_for('main.discover'))

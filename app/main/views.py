@@ -14,7 +14,7 @@ def home():
 def discover():
     # Place to display projects
     page = request.args.get('page', 1, type=int)
-    projects = Project.query.order_by(Project.publish_time.desc()).paginate(page=page, per_page=5)  # projects / page
+    projects = Project.query.order_by(Project.publish_time.desc()).paginate(page=page, per_page=7)  # projects / page
     return render_template('discover.html', projects=projects)
 
 @main_blueprint.route('/about')
