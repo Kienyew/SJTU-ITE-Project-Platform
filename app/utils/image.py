@@ -24,9 +24,20 @@ def compress_and_save(p_img: Image, save_path: str):
 
 
 def save_images(form: forms.PublishProjectForm) -> List[str]:
+    """
+    Wouldn't create new data if previous data exist, otherwise compress and save
+    
+    :param form:
+    :return: always return a List[str] with four picture names inside  'static > user resources > <filename>'
+    """
+    
     filenames = []
     for data in [form.project_pic1.data, form.project_pic2.data, form.project_pic3.data, form.project_pic4.data]:
         if data:
+            if os.path.isfile(os.path.join(current_app.root_path, "static", "user resources", data.filename)):
+                filenames.append(data.filename)
+                continue
+                
             i = Image.open(data)
             # Hash file data from stream to avoid naming collision
             f_name, f_ext = os.path.splitext(data.filename)
@@ -37,8 +48,19 @@ def save_images(form: forms.PublishProjectForm) -> List[str]:
 
             compress_and_save(i, save_path)
             filenames.append(new_name)
-        # Ensure the picture is always store in sequential
+            # Ensure the picture is always store in sequential
 
     print("\n".join(filenames))
     filenames = filenames if len(filenames) == 4 else filenames + ['' for _ in range(4 - len(filenames))]
     return filenames
+
+
+def delete_unused_image(form: forms.PublishProjectForm, old_images: [str]):
+    for new_image in [form.project_pic1.data, form.project_pic2.data, form.project_pic3.data, form.project_pic4.data]:
+        if new_image and new_image.filename in old_images:
+            old_images.remove(new_image.filename)
+            
+    for image in old_images:
+        if image:
+            print(f"Removing: {os.path.join(current_app.root_path, 'static', 'user resources', image)}")
+            os.remove(os.path.join(current_app.root_path, "static", "user resources", image))
