@@ -107,14 +107,14 @@ def post(id: int):
 @login_required
 def toggle_like(id: int):
     """
-	Post to this route when a user like/unlike a project.
-	If the user has already liked the project before, it will unlike the project.
+    Post to this route when a user like/unlike a project.
+    If the user has already liked the project before, it will unlike the project.
 
-	Parameters:
-	id (int): Project id the user wanted to like
-	
-	Returns:
-	json response
+    Parameters:
+    id (int): Project id the user wanted to like
+    
+    Returns:
+    json response
     """
     if id == -1:
         return 'forbidden access', 403
@@ -165,6 +165,6 @@ def generate_dummies():
     
     db.session.add_all(users + projects)
     db.session.commit()
-    # TODO: Randomize like
+    # TODO: Randomize like + record existing dummy account
     print("WARNING!!! Only use this for testing purpose")
     return redirect(url_for('main.discover'))
