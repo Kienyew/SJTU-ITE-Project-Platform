@@ -39,7 +39,7 @@ def search(query: str):
     page = request.args.get('page', 1, type=int)
     projects = Project.query.msearch(query).order_by(Project.publish_time.desc()).paginate(page=page, per_page=current_app.config['POSTS_PER_PAGE'])
     
-    return render_template('discover.html', projects=projects)
+    return render_template('discover.html', projects=projects, query=query)
     
 
 @main_blueprint.route('/about')

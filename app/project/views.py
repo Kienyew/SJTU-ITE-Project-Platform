@@ -99,6 +99,7 @@ def post(id: int):
     :param id: primary id in the project field
     :return: a single project webpage view
     """
+    
     project = Project.query.filter_by(id=id).first_or_404()
     print(project.project_pic1)  # DEBUG
     print(project.project_pic2)
@@ -117,6 +118,7 @@ def toggle_like(id: int):
     :param id: The primary key in Project model
     :return: json response with http status
     """
+    
     if id == -1:
         return 'forbidden access', 403
     print(f"THERE's request for toggling like for project:{id} from {current_user}")
