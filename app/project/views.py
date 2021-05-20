@@ -17,7 +17,7 @@ def my_project():
     :return: redirect to main.discover if success otherwise return this page with error message
     """
     
-    # TODO: Fix paragraph tag wrapping issue
+    # TODO: Fix paragraph tag wrapping issue + Better solution + delete pictures + file upload pre-populate solution
     form = PublishProjectForm()
     
     if form.validate_on_submit():
@@ -51,6 +51,7 @@ def my_project():
         form.team_description.data = project.team_description
         form.teammates.data = project.teammates
         form.project_name.data = project.project_name
+        print(type(form.project_pic1), type(project.project_pic1))
         form.project_pic1.data = project.project_pic1
         form.project_pic2.data = project.project_pic2
         form.project_pic3.data = project.project_pic3
