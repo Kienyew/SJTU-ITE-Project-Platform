@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--  Cause I lazy so I write my CSS & js here, shouldn't be long  -->
+
+    <style>
+        :root {
+            --theme-color: #00BCD4;
+            --success: #2ecd70;
+            --danger: #e74d3d;
+            --info: #3398da;
+            --warning: #f1c30f;
+            --success: #2ecd70;
+            --main: #414141;
+            --height: 60px;
+            --icon-size: 22px;
+        }
+        /* design the alert box---------------------------------------------------------------------------- */
+        #alert-box {
+            position: fixed;
+            top: 0;
+            right: 0;
+            direction: rtl;
+            width: 90%;
+            padding: 1rem;
+            overflow: hidden;
+            z-index: 100000;
+            transition: height 300ms;
+        }
+
+        .alert {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 0;
+            max-width: 420px;
+            margin-bottom: 1rem;
+            background-color: #FAFAFA;
+            opacity: 1;
+            padding: 0 1.2rem;
+            border-radius: 5%;
+            box-shadow: 0 5px 35px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: opacity 200ms, height 200ms, padding 200ms;
+        }
+
+        .alert::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 3px;
+            width: 0;
+            animation: border 4s forwards linear;
+        }
+
+        .alert.alert-active {
+            opacity: 1;
+            height: var(--height);
+        }
+
+        .alert.alert-closing {
+            height: var(--height);
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: opacity 300ms 200ms, transform 500ms;
+        }
+
+        .alert.alert-success::before {
+            background-color: var(--success);
+        }
+
+        .alert.alert-danger::before {
+            background-color: var(--danger);
+        }
+
+        .alert.alert-warning::before {
+            background-color: var(--warning);
+        }
+
+        .alert.alert-info::before {
+            background-color: var(--info);
+        }
+
+        .alert-content {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .alert-icon {
+            width: var(--icon-size);
+            height: var(--icon-size);
+            margin-left: 0.8rem;
+        }
+
+        .alert-success .alert-icon {
+            background: url(icons/035-checked.png) no-repeat center / cover;
+        }
+
+        .alert-warning .alert-icon {
+            background: url(icons/050-idea.png) no-repeat center / cover;
+        }
+
+        .alert-danger .alert-icon {
+            background: url(icons/045-minus.png) no-repeat center / cover;
+        }
+
+        .alert-info .alert-icon {
+            background: url(icons/029-information.png) no-repeat center / cover;
+        }
+
+        .alert-message {
+            font-size: 0.9rem;
+            text-align: right;
+            color: var(--main);
+        }
+
+        .alert-dismiss {
+            width: 30px;
+            height: 30px;
+            background: url(icons/059-cancel.png) no-repeat center / 60%;
+            cursor: pointer;
+        }
+
+        @keyframes border {
+            100% {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<button>Show Alert</button>
+<div class="alert hide">
+    <span class="fas fa-exclamation-circle"></span>
+    <span class="msg">Warning: This is a warning alert!</span>
+    <div class="close-btn">
+        <span class="fas fa-times"></span>
+    </div>
+</div>
+
+<script>
+    // for alert box ------------------------------------------------------------------------------------------------------------------------
+    // initializer
+    const rootElement = document.querySelector("body:first-child");
+    const body = document.querySelector("body");
+
+    const alertBox = document.createElement("div");
+    alertBox.setAttribute("id", "alert-box");
+    body.insertBefore(alertBox, rootElement);
+
+
+    // Show alert box
+    function showAlert(message, status) {
+        const alert = document.createElement("div");
+        const alertIcon = document.createElement("div");
+        const alertContent = document.createElement("div");
+        const alertMessage = document.createElement("div");
+        const alertDismiss = document.createElement("div");
+
+        const delay = 100; // set delay
+
+        // alert
+        alert.className = "alert";
+        setTimeout(function () {
+            alert.classList.add("alert-active");
+            alert.classList.add(`alert-${status}`);
+        }, delay)
+
+        // content
+        alertContent.className = "alert-content";
+        alertMessage.textContent = message;
+
+        // icon
+        alertIcon.className = "alert-icon";
+
+        // dismiss
+        alertDismiss.className = "alert-dismiss";
+
+        // append everything together
+        alertContent.appendChild(alertIcon);
+        alertContent.appendChild(alertMessage);
+        alert.appendChild(alertContent);
+        alert.appendChild(alertDismiss);
+
+        // add to DOM
+        alertBox.prepend(alert);
+
+        // auto closing
+        setTimeout(function () {
+            alert.classList.remove("alert-active");
+            alert.classList.add("alert-closing");
+
+            // remove element from dom
+            setTimeout(function () {
+                alert.remove();
+            }, 500);
+        }, 4000 + delay);
+
+        // remove by clicking
+        function dismissAlert(event) {
+            if (event.target.parentElement.classList.contains("alert")) {
+                console.log("true");
+                const alert = event.target.parentElement;
+                alert.classList.remove("alert-active");
+                alert.classList.add("alert-closing");
+                setTimeout(function () {
+                    alert.remove();
+                }, 500);
+            }
+        }
+
+        document.addEventListener("click", dismissAlert);
+    }
+</script>
+</body>
+</html>
