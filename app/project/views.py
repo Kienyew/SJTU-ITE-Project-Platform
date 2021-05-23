@@ -53,7 +53,7 @@ def my_project():
             db.session.add(project)
         db.session.commit()
         
-        flash('Upload success')
+        flash('成功上传', 'success')
         return redirect(url_for('main.discover'))
     
     try:  # If exist previous data
@@ -175,4 +175,6 @@ def generate_dummies():
     db.session.commit()
     # TODO: Randomize like + record existing dummy account
     print("WARNING!!! Only use this for testing purpose")
+    
+    flash('测试用户及作品已生成', 'success')
     return redirect(url_for('main.discover'))

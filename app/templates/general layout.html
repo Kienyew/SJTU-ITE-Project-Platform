@@ -13,9 +13,9 @@
   <body>
     {% block content %}{% endblock %}
 
-    <!-- TODO: flash message implementation -->
-    <script src="{{ url_for('static', filename='flash script.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/flash script.js') }}"></script>
     <script>
+      // flask flash custom messages
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
           {% for category, message in messages %}
@@ -24,15 +24,13 @@
         {% endif %}
       {% endwith %}
 
-      <!-- flask form error -->
-      {% if form %}
-        {% if form.errors %}
-          {% for field, errorMsg in form.errors.items() %}
-            {% for err in errorMsg %}
-              showAlert('{{ err }}', 'danger');
-            {% endfor %}
+      // flask form errors
+      {% if form and form.errors %}
+        {% for field, errorMsg in form.errors.items() %}
+          {% for err in errorMsg %}
+            showAlert('{{ err }}', 'danger');
           {% endfor %}
-        {% endif %}
+        {% endfor %}
       {% endif %}
     </script>
 

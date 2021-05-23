@@ -1,7 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap");
 
 :root {
-  --theme-color: #00bcd4;
+    --theme-color: #53daea;
+    --success: #4cf695;
+    --danger: #ec3423;
+    --info: #3a9bde;
+    --warning: #f8ce2d;
+    --main: #414141;
+    --height: 5rem;
+    --icon-size: 2rem;
 }
 
 * {
@@ -410,3 +417,114 @@ footer {
   opacity: 1;
 }
 
+/* design the alert box-------------------------------------------------------------------------------------- */
+#alert-box {
+    position: fixed;
+    width: 100%;
+    top: 10rem;
+    direction: rtl;
+    padding: 1rem;
+    overflow: hidden;
+    z-index: 100000;
+    transition: height 300ms;
+}
+
+.alert {
+    position: relative;
+    right: 50%;
+    transform: translateX(50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 0;
+    max-width: 40rem;
+    margin-bottom: 1rem;
+    background-color: #f6f6f6;
+    opacity: 1;
+    padding: 0 1.2rem;
+    border-radius: 1.1rem;
+    box-shadow: 0 0.9rem 3.5rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: opacity 200ms, height 200ms, padding 200ms;
+}
+
+.alert::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    animation: border 4s forwards linear;
+}
+
+.alert.alert-active {
+    opacity: 1;
+    height: var(--height);
+}
+
+.alert.alert-closing {
+    height: var(--height);
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: opacity 300ms 200ms, transform 500ms;
+}
+
+.alert.alert-success::before {
+    background-color: var(--success);
+}
+
+.alert.alert-danger::before {
+    background-color: var(--danger);
+}
+
+.alert.alert-warning::before {
+    background-color: var(--warning);
+}
+
+.alert.alert-info::before {
+    background-color: var(--info);
+}
+
+.alert-content {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.alert-icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    margin-left: 0.8rem;
+}
+
+.alert-success .alert-icon {
+    background: url(/static/resources/icons/035-checked.png) no-repeat center / cover;
+}
+
+.alert-warning .alert-icon {
+    background: url(/static/resources/icons/050-idea.png) no-repeat center / cover;
+}
+
+.alert-danger .alert-icon {
+    background: url(/static/resources/icons/045-minus.png) no-repeat center / cover;
+}
+
+.alert-info .alert-icon {
+    background: url(/static/resources/icons/029-information.png) no-repeat center / cover;
+}
+
+.alert-dismiss {
+    width: 32px;
+    height: 32px;
+    background: url(/static/resources/icons/059-cancel.png) no-repeat center / 60%;
+    cursor: pointer;
+}
+
+@keyframes border {
+    100% {
+        width: 100%;
+    }
+}

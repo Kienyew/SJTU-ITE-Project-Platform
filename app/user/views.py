@@ -20,6 +20,7 @@ def register():
     
     # TODO: require email verification
     if current_user.is_authenticated:
+        flash('你已登陆', 'info')
         return redirect(url_for('main.discover'))
 
     form = RegistrationForm()
@@ -29,8 +30,8 @@ def register():
     user = User(email=form.email.data, username=form.username.data, password_hash=generate_password_hash(form.password.data))
     db.session.add(user)
     db.session.commit()
-    flash('Successfully registered!')
 
+    flash('成功注册用户账号', 'success')
     return redirect(url_for('user.login'))
 
 
@@ -59,12 +60,12 @@ def login():
 
         if user := (user if user and check_password_hash(user.password_hash, form.password.data) else None):
             login_user(user, remember=False)
-            flash('Successfully logged in')
+            flash('成功登入', 'success')
 
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('main.discover'))
         else:
-            flash('Invalid account or password')
+            flash('用户名或密码不正确', 'danger')
 
     return render_template('login.html', form=form)
 
@@ -78,7 +79,7 @@ def logout():
     """
     
     logout_user()
-    flash('You have been logged out')
+    flash('成功登出', 'success')
     return redirect(url_for('main.home'))
 
 
@@ -94,7 +95,8 @@ def reset_password():
     form = ForgetPassword()
     if not form.validate_on_submit():
         return render_template('forgot password.html', form=form)
-
+    
+    flash('重新激活密码请求已发至邮箱', 'info')
     return redirect(url_for('user.login'))
 
 
@@ -121,8 +123,7 @@ def update_account():
             current_user.password_hash = generate_password_hash(form.new_password.data)
 
         db.session.commit()
-        flash("Your account has been updated", 'success')
+        flash("用户资料成功更新", 'success')
         return redirect(url_for('main.discover'))
 
-    print(form.errors) # DEBUG
     return render_template('update account.html', form=form)

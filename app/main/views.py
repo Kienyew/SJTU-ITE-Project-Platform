@@ -1,4 +1,4 @@
-from flask import render_template, request, current_app
+from flask import render_template, request, current_app, flash
 from . import main_blueprint
 from ..project.models import Project
 # This is the main entry, contain webpage with general purpose
@@ -23,7 +23,7 @@ def discover():
     
     page = request.args.get('page', 1, type=int)
     projects = Project.query.order_by(Project.publish_time.desc()).paginate(page=page, per_page=current_app.config['POSTS_PER_PAGE'])  # projects / page
-    
+
     return render_template('discover.html', projects=projects)
 
 @main_blueprint.route('/search/', defaults={'query': ''}, methods=['POST', 'GET'])
