@@ -125,8 +125,7 @@
     </div>
     <h2 class="project-group-name">{{ project.team_name }}</h2>
     <h4>{{ project.team_description }}</h4>
-    {# TODO: add email href jump#}
-    <a href="#" class="project-contact-btn">
+    <a href=mailto:{{ project.publisher.email }} class="project-contact-btn">
       <i class="fas fa-envelope"></i> 联系我
     </a>
   </div>
