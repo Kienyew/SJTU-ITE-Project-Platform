@@ -1,15 +1,22 @@
 import os
 import random
+import smtplib
 from email_validator import validate_email, EmailNotValidError
 from flask import render_template, redirect, url_for, flash, request, current_app
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from email.mime.text import MIMEText
+from email.utils import formataddr
+from random import randint
 
 from . import user_blueprint
 from .forms import RegistrationForm, LoginForm, ForgetPassword, UpdateAccount
 from .models import User
 from .. import db
 
+# Account and verification of email sender
+mailsender = 'sjtu-ite-platform@qq.com'
+mailsendpass = 'xqjdixlzltvmdhif'
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
@@ -28,6 +35,23 @@ def register():
         return render_template('register.html', form=form)
 
     user = User(email=form.email.data, username=form.username.data, password_hash=generate_password_hash(form.password.data))
+    ret = {'flag': True, 'captcha': randint(100000, 999999)}
+    try:
+        msg = MIMEText(f"您正在注册上海交通大学学生实践项目展示网，验证码：{ret['captcha']}。如果您未注册，请忽略本邮件。", 'plain', 'utf-8')
+        msg['From'] = formataddr(["SJTU-ITE-Project-Platform", mailsender])
+        msg['To'] = formataddr([user.username, user.email])
+        msg['Subject'] = "Captcha of SJTU-ITE-Project-Platform"
+        server = smtplib.SMTP_SSL("smtp.qq.com", 465)
+        server.login(mailsender, mailsendpass)
+        server.sendmail(mailsender, user.email, msg.as_string())
+        server.quit()
+    except Exception as e:  #if failed to send captcha
+        ret = False
+    if ret['flag']:
+        flash('激活码已发至邮箱', 'info')
+    else:
+        flash('邮件发送失败，请检查邮箱地址', 'danger')
+
     db.session.add(user)
     db.session.commit()
 
