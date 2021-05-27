@@ -8,7 +8,6 @@ import re
 from .models import User
 
 # Form validation and models
-# TODO: Update all alert message to chinese
 
 EMAIL_VALIDATORS = [DataRequired(message='邮箱未填'), Email(message='邮箱填写错误')]
 PASSWORD_VALIDATORS = [DataRequired(message='密码未填'), Length(8, 64, message='密码长度太长或太短')]
@@ -19,7 +18,7 @@ class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=USERNAME_VALIDATORS)
     email = StringField('Email', validators=EMAIL_VALIDATORS)
     password = PasswordField('Password', validators=PASSWORD_VALIDATORS)
-    password_confirm = PasswordField('Confirm password', validators=PASSWORD_VALIDATORS + [EqualTo('password', message="两个密码不正确")])
+    password_confirm = PasswordField('Confirm password', validators=PASSWORD_VALIDATORS + [EqualTo('password', message="两个密码不匹配")])
     submit = SubmitField('Register')
 
     def validate_email(self, field):
@@ -49,7 +48,7 @@ class ForgetPassword(FlaskForm):
 
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=PASSWORD_VALIDATORS)
-    confirm_password = PasswordField('Confirm Password', validators=PASSWORD_VALIDATORS + [EqualTo('password', "Password doesn't match!")])
+    confirm_password = PasswordField('Confirm Password', validators=PASSWORD_VALIDATORS + [EqualTo('password', "密码不匹配")])
     submit = SubmitField('Reset Password')
 
 
@@ -59,7 +58,7 @@ class UpdateAccount(FlaskForm):
     old_password = PasswordField('Old Password', validators=PASSWORD_VALIDATORS)
     new_password = PasswordField('New Password', validators=[Length(0, 64)])
     new_password_confirm = PasswordField(
-        'Confirm password', validators=[Length(0, 64), EqualTo('new_password', "New password doesn't match!")])
+        'Confirm password', validators=[Length(0, 64), EqualTo('new_password', "两个密码不匹配")])
     submit = SubmitField('Update')
 
     def validate_username(self, field):
@@ -68,18 +67,18 @@ class UpdateAccount(FlaskForm):
             return
 
         if User.query.filter_by(username=field.data).first():
-            raise ValidationError('Username already taken or too short')
+            raise ValidationError('用户名已被注册')
         elif len(field.data) < 4:
-            raise ValidationError('Username too short')
+            raise ValidationError('用户名过短')
         elif len(field.data) > 63:
-            raise ValidationError('Username too long')
+            raise ValidationError('用户名过长')
         elif not re.match(r'^[a-zA-Z0-9_]+$', field.data):
-            raise ValidationError('Username can contains only latin characters and digits')
+            raise ValidationError('用户名只能包含拉丁文和数字')
 
     def validate_old_password(self, field):
         if not check_password_hash(current_user.password_hash, field.data):
-            raise ValidationError('Wrong old Password')
+            raise ValidationError('旧密码不正确')
 
     def validate_new_password(self, field):
         if field.data and len(field.data) < 8:
-            raise ValidationError('Password too short')
+            raise ValidationError('密码过短')
