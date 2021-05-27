@@ -57,7 +57,8 @@ def delete_image(image_name: str):
     :param image_name: image name of user project pic
     :return: none (should probably return boolean status)
     """
-    
+    if not image_name:
+        return
     img_path = os.path.join(current_app.root_path, 'static', 'user resources', image_name)
     if os.path.isfile(img_path):
         print(f"Removing: {img_path}")

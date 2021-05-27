@@ -17,6 +17,10 @@ def make_shell_context():
         'Project': Project,
     }
 
+@app.cli.command()
+def createdb():
+    print("Creating db....")
+    db.create_all()
 
 if __name__ == '__main__':
     # For debugging purpose, create database if not exist in current directory
