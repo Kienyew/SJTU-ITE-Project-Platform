@@ -59,7 +59,7 @@ for _ in range(NUMS_ACCOUNT):
         project_pictures.append("testing/" + random.choice(testing_pictures))
 
     project_description = []
-    for _ in range(random.randint(3, 6)):
+    for _ in range(random.randint(2, 4)):
         project_description.append(random.choice(random_paragraph))
     
     output_usernames.append(username)
@@ -72,7 +72,7 @@ for _ in range(NUMS_ACCOUNT):
     output_project_name.append(random.choice(project_names))
     output_project_pictures.append(project_pictures)
     output_project_description.append(project_description)
-    output_project_date.append(random_date_between(datetime.date(2018, 1, 2), datetime.date(2021, 12, 24)))
+    output_project_date.append(random_date_between(datetime.date(2018, 1, 2)))  # Generate date between curVal and today
 
 # Output configuration -------------------------------------------------------------------------------------------------
 fake_data = {
