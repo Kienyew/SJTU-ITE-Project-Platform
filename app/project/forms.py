@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
-from wtforms import StringField, SubmitField, TextField, FileField, TextAreaField
+from wtforms import StringField, SubmitField, FileField, TextAreaField
 from wtforms.validators import DataRequired, Length
 
 
@@ -10,11 +10,16 @@ class PublishProjectForm(FlaskForm):
     teammates = StringField('Teammates', validators=[DataRequired(), Length(1, 16)])
     project_name = StringField('Project name', validators=[DataRequired(), Length(1, 16)])
     
-    project_pic1 = FileField('', validators=[DataRequired(), FileAllowed(['jpg', 'jpeg', 'png'])])
+    project_pic1 = FileField('', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])  # Must have at least one picture
     project_pic2 = FileField('', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     project_pic3 = FileField('', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     project_pic4 = FileField('', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     
-    project_description = TextAreaField('Project description', validators=[DataRequired(), Length(1, 120)])
-
+    pic1_delete = StringField()  # Act as a boolean for delete picture
+    pic2_delete = StringField()
+    pic3_delete = StringField()
+    pic4_delete = StringField()
+    
+    project_description = TextAreaField('Project description', validators=[DataRequired(), Length(1, 300)])
     submit = SubmitField('Publish')
+

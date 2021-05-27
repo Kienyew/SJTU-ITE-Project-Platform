@@ -30,50 +30,54 @@ def compress_and_save(p_img: Image, save_path: str):
     # TODO: Add raise if error
 
 
-def save_images(form: forms.PublishProjectForm) -> List[str]:
-    """Ignore if previous data exist, otherwise compress and save
+def save_image(img_container) -> str:
+    """save data from FileStorage and return the name of compressed file
     
-    :param form: forms.PublishProjectForm
-    :return: always return a List[str] with four picture names inside  'static > user resources > <filename>'
+    :param img_container: werkzeug.datastructures.FileStorage
+    :return: always return a filename(str) that reside in 'static > user resources > <filename>'
     """
     
-    filenames = []
-    for data in [form.project_pic1.data, form.project_pic2.data, form.project_pic3.data, form.project_pic4.data]:
-        if data:
-            if os.path.isfile(os.path.join(current_app.root_path, "static", "user resources", data.filename)):
-                filenames.append(data.filename)
-                continue
-                
-            i = Image.open(data)
-            # Hash file data from stream to avoid naming collision
-            f_name, f_ext = os.path.splitext(data.filename)
-            new_name = hashlib.sha256(i.tobytes()).hexdigest() + f_ext
-            save_path = os.path.join(current_app.root_path, "static", "user resources", new_name)
-            # DEBUG
-            print(f'Original : {f_name} + {f_ext}\n New name : {new_name}\n Save path : {save_path}')
+    print(img_container)
+    if img_container.filename:
+        i = Image.open(img_container)
+        # Hash file data from stream to avoid naming collision
+        f_name, f_ext = os.path.splitext(img_container.filename)
+        new_name = hashlib.sha256(i.tobytes()).hexdigest() + f_ext
+        save_path = os.path.join(current_app.root_path, "static", "user resources", new_name)
+        print(f'Original : {f_name} + {f_ext}\n New name : {new_name}\n Save path : {save_path}')  # DEBUG
 
-            compress_and_save(i, save_path)
-            filenames.append(new_name)
-            # Ensure the picture is always store in sequential
-
-    print("\n".join(filenames))
-    filenames = filenames + ['' for _ in range(len(filenames), 4)]  # Ensure the return length is always 4
-    return filenames
+        compress_and_save(i, save_path)
+        return new_name
+    return ''
 
 
-def delete_unused_image(form: forms.PublishProjectForm, old_images: [str]):
+def delete_image(image_name: str):
     """A helper function to compare newly added images to old one and delete
     
-    :param form: forms.PublishProjectForm
-    :param old_images: Array of image names
-    :return: none (should probably return status)
+    :param image_name: image name of user project pic
+    :return: none (should probably return boolean status)
     """
     
-    for new_image in [form.project_pic1.data, form.project_pic2.data, form.project_pic3.data, form.project_pic4.data]:
-        if new_image and new_image.filename in old_images:
-            old_images.remove(new_image.filename)
-            
-    for image in old_images:
-        if image:
-            print(f"Removing: {os.path.join(current_app.root_path, 'static', 'user resources', image)}")
-            os.remove(os.path.join(current_app.root_path, "static", "user resources", image))
+    img_path = os.path.join(current_app.root_path, 'static', 'user resources', image_name)
+    if os.path.isfile(img_path):
+        print(f"Removing: {img_path}")
+        os.remove(img_path)
+
+
+def process_all_images(delete_toggle, old_pic, new_pic) -> [str]:
+    for idx in range(4):  # delete unused image first
+        if delete_toggle[idx] or new_pic[idx].filename:
+            delete_image(old_pic[idx])
+            if delete_toggle[idx]:
+                old_pic[idx] = ''
+            else:  # New image
+                new_filename = save_image(new_pic[idx])
+                old_pic[idx] = new_filename
+    
+    # Ensure the pic names are in sequence
+    for i in range(3, -1, -1):
+        if not old_pic[i]:
+            old_pic.pop(i)
+            old_pic.append('')
+    
+    return old_pic

@@ -1,5 +1,5 @@
 from werkzeug.security import generate_password_hash
-from flask import render_template, url_for, redirect, flash, current_app, abort
+from flask import render_template, url_for, redirect, flash, current_app, abort, request
 from flask_login import login_required, current_user
 
 from .. import db
@@ -23,21 +23,34 @@ def my_project():
     :return: redirect to main.discover if success otherwise return this page with an error message
     """
     
-    # TODO: Fix paragraph tag wrapping issue + Better solution + delete pictures + file upload pre-populate solution
-    
     form = PublishProjectForm()
     
     if form.validate_on_submit():
         try:  # If exist previous data
             project = current_user.published_projects[0]
-            image.delete_unused_image(form, [project.project_pic1, project.project_pic2, project.project_pic3,
-                                             project.project_pic4])
             has_previous = True
         except:  # Create new if old one doesn't exist
             project = Project()
             has_previous = False
-        pic_names = image.save_images(form)  # Compress and save
+        if form.pic1_delete.data or not (form.project_pic1.data.filename or project.project_pic1):  # Check first slot
+            flash('第一格照片不能为空', 'danger')
+            pic_data = {"project_pic1": project.project_pic1, "project_pic2": project.project_pic2,
+                        "project_pic3": project.project_pic3, "project_pic4": project.project_pic4}
+            form.pic1_delete.data = ''  # Reset status
+            form.pic2_delete.data = ''
+            form.pic3_delete.data = ''
+            form.pic4_delete.data = ''
+            return render_template('submit project.html', form=form, pic_data=pic_data)
         
+        # Main logic to handle images
+        delete_toggles = [form.pic1_delete.data, form.pic2_delete.data, form.pic3_delete.data, form.pic4_delete.data]
+        old_pictures = [project.project_pic1, project.project_pic2, project.project_pic3, project.project_pic4]
+        new_pictures = [form.project_pic1.data, form.project_pic2.data, form.project_pic3.data, form.project_pic4.data]
+        # print(delete_toggles)
+        # print(old_pictures)
+        # print(new_pictures)
+        pic_names = image.process_all_images(delete_toggles, old_pictures, new_pictures)
+
         project.team_name = form.team_name.data
         project.team_description = form.team_description.data
         project.teammates = form.teammates.data
@@ -48,12 +61,12 @@ def my_project():
         project.project_pic4 = pic_names[3]
         project.project_description = form.project_description.data
         project.publisher = current_user
-        
+
         if not has_previous:
             db.session.add(project)
         db.session.commit()
-        
-        flash('成功上传', 'success')
+
+        flash('成功上传作品', 'success')
         return redirect(url_for('main.discover'))
     
     try:  # If exist previous data
@@ -63,31 +76,14 @@ def my_project():
         form.team_description.data = project.team_description
         form.teammates.data = project.teammates
         form.project_name.data = project.project_name
-        print(type(form.project_pic1), type(project.project_pic1))
-        form.project_pic1.data = project.project_pic1
-        form.project_pic2.data = project.project_pic2
-        form.project_pic3.data = project.project_pic3
-        form.project_pic4.data = project.project_pic4
         form.project_description.data = project.project_description
         
-        # Pass as a dict because I can't make it work with changing label T_T
-        pic_data = {
-            "project_pic1": project.project_pic1,
-            "project_pic2": project.project_pic2,
-            "project_pic3": project.project_pic3,
-            "project_pic4": project.project_pic4
-        }
-        print(project.project_pic1 + '\n' +  # Debug
-              project.project_pic2 + '\n' +
-              project.project_pic3 + '\n' +
-              project.project_pic4)
+        # Pass as a dict because Flask wtforms can't post back custom attribute T_T
+        pic_data = {"project_pic1": project.project_pic1, "project_pic2": project.project_pic2,
+                    "project_pic3": project.project_pic3, "project_pic4": project.project_pic4}
+        print(f"User pictures:\n{pic_data}")
     except:
-        pic_data = {
-            "project_pic1": None,
-            "project_pic2": None,
-            "project_pic3": None,
-            "project_pic4": None
-        }
+        pic_data = {"project_pic1": '', "project_pic2": '', "project_pic3": '', "project_pic4": ''}
     
     return render_template('submit project.html', form=form, pic_data=pic_data)
 
@@ -101,10 +97,10 @@ def post(id: int):
     """
     
     project = Project.query.filter_by(id=id).first_or_404()
-    print(project.project_pic1)  # DEBUG
-    print(project.project_pic2)
-    print(project.project_pic3)
-    print(project.project_pic4)
+    # print(project.project_pic1)  # DEBUG
+    # print(project.project_pic2)
+    # print(project.project_pic3)
+    # print(project.project_pic4)
     return render_template('single project.html', project=project)
 
 

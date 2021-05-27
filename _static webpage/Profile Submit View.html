@@ -55,13 +55,20 @@
         <div class="form-group">
           <label>作品图片（至少一张图）</label>
           <div class="form-pictures">
+
             <div class="form-picture">
-              <label for="project-img-1" class="file-upload">
-                <input accept="image/*" type="file" name="project-img-1" id="project-img-1" class="form-project-img" onchange="showPreview(this)">
-                <i class="fa fa-cloud-upload"></i> 上传
-              </label>
+              <div class="form-toggle-group">
+                <label for="project-img-1" class="file-upload">
+                  <input accept="image/*" type="file" name="project-img-1" id="project-img-1" class="form-project-img" onchange="showPreview(this)" data-picname="default">
+                  <i class="fa fa-cloud-upload"></i> 上传
+                </label>
+                <label class="file-remove" onclick="deletePicture(this)">
+                  <i class="fas fa-trash-alt"></i> 清空
+                </label>
+              </div>
               <img src="pictures/project placeholder.png" alt="project-img-1">
             </div>
+
             <div class="form-picture">
               <label for="project-img-2" class="file-upload">
                 <input accept="image/*" type="file" name="project-img-2" id="project-img-2" class="form-project-img" onchange="showPreview(this)">
@@ -125,11 +132,24 @@
       function showPreview(event) {
         const [file] = event.files
         if (file) {  // if file exists
-          console.log(URL.createObjectURL(file));
+          let url = URL.createObjectURL(file);
+          console.log(url);
           console.log(event);
-          event.parentNode.parentNode.children[1].src = URL.createObjectURL(file);
+          event.dataset.picname = file.name;
+          event.parentNode.parentNode.parentNode.children[1].src = url;
         }
       }
+
+      function deletePicture(event) {
+        let input = event.parentNode.children[0].children[0];
+        console.log(event);
+        let picture = event.parentNode.parentNode.children[1];
+        console.log(picture);
+
+        input.dataset.picname = "default";
+        picture.src = "pictures/project placeholder.png";
+      }
+
     </script>
   </body>
 </html>

@@ -38,43 +38,70 @@
       <label>作品图片（至少要有一张图在第一格）</label>
       <div class="form-pictures">
         <div class="form-picture">
-          <label for="project_pic1" class="file-upload">
-            {{ form.project_pic1(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
-            <i class="fa fa-cloud-upload"></i> 上传
-          </label>
+          <div class="form-toggle-group">
+            <label for="project_pic1" class="file-upload">
+              {{ form.project_pic1(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
+              <i class="fa fa-cloud-upload"></i> 上传
+            </label>
+            <label class="file-remove" onclick="deletePicture(this)">
+              <i class="fas fa-trash-alt"></i> 清空
+            </label>
+            {{ form.pic1_delete(class='form-hidden-input') }}
+          </div>
           {% if pic_data['project_pic1'] %}
             <img src="{{ url_for('static', filename='user resources/' + pic_data['project_pic1']) }}" alt="project-img-1">
           {% else %}
             <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-1">
           {% endif %}
         </div>
+
         <div class="form-picture">
-          <label for="project_pic2" class="file-upload">
-            {{ form.project_pic2(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
-            <i class="fa fa-cloud-upload"></i> 上传
-          </label>
+          <div class="form-toggle-group">
+            <label for="project_pic2" class="file-upload">
+              {{ form.project_pic2(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
+              <i class="fa fa-cloud-upload"></i> 上传
+            </label>
+            <label class="file-remove" onclick="deletePicture(this)">
+              <i class="fas fa-trash-alt"></i> 清空
+            </label>
+            {{ form.pic2_delete(class='form-hidden-input') }}
+          </div>
           {% if pic_data['project_pic2'] %}
             <img src="{{ url_for('static', filename='user resources/' + pic_data['project_pic2']) }}" alt="project-img-2">
           {% else %}
             <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-2">
           {% endif %}
         </div>
+
         <div class="form-picture">
-          <label for="project_pic3" class="file-upload">
-            {{ form.project_pic3(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
-            <i class="fa fa-cloud-upload"></i> 上传
-          </label>
+          <div class="form-toggle-group">
+            <label for="project_pic3" class="file-upload">
+              {{ form.project_pic3(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
+              <i class="fa fa-cloud-upload"></i> 上传
+            </label>
+            <label class="file-remove" onclick="deletePicture(this)">
+              <i class="fas fa-trash-alt"></i> 清空
+            </label>
+            {{ form.pic3_delete(class='form-hidden-input') }}
+          </div>
           {% if pic_data['project_pic3'] %}
             <img src="{{ url_for('static', filename='user resources/' + pic_data['project_pic3']) }}" alt="project-img-3">
           {% else %}
             <img src="{{ url_for('static', filename='user resources/project placeholder.png') }}" alt="project-img-3">
           {% endif %}
         </div>
+
         <div class="form-picture">
-          <label for="project_pic4" class="file-upload">
-            {{ form.project_pic4(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
-            <i class="fa fa-cloud-upload"></i> 上传
-          </label>
+          <div class="form-toggle-group">
+            <label for="project_pic4" class="file-upload">
+              {{ form.project_pic4(class="form-project-img", onchange="showPreview(this)", accept="image/*") }}
+              <i class="fa fa-cloud-upload"></i> 上传
+            </label>
+            <label class="file-remove" onclick="deletePicture(this)">
+              <i class="fas fa-trash-alt"></i> 清空
+            </label>
+            {{ form.pic4_delete(class='form-hidden-input') }}
+          </div>
           {% if pic_data['project_pic4'] %}
             <img src="{{ url_for('static', filename='user resources/' + pic_data['project_pic4']) }}" alt="project-img-4">
           {% else %}
@@ -100,12 +127,25 @@
 <script>
   // For preview when select a picture to upload
   function showPreview(event) {
-    const [file] = event.files
+    const [file] = event.files;
+    let picture = event.parentNode.parentNode.parentNode.children[1];
+    let deleteBool = event.parentNode.parentNode.children[2];
+
     if (file) {  // if file exists
-      console.log(URL.createObjectURL(file));
-      console.log(event);
-      event.parentNode.parentNode.children[1].src = URL.createObjectURL(file);
+      deleteBool.value = '';
+      picture.src = URL.createObjectURL(file);
     }
+  }
+
+  function deletePicture(event) {
+    let input = event.parentNode.children[0].children[0];
+    let picture = event.parentNode.parentNode.children[1];
+    let deleteBool = event.parentNode.children[2];
+
+    input.dataset.picname = "default";
+    input.value = "";
+    deleteBool.value = "Yes";
+    picture.src = "{{ url_for('static', filename='user resources/project placeholder.png') }}";
   }
 </script>
 {% endblock %}

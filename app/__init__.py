@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_msearch import Search
 
@@ -8,10 +7,11 @@ from config import Config
 
 
 db = SQLAlchemy()
-bootstrap = Bootstrap()
 search = Search()
 login_manager = LoginManager()
 login_manager.login_view = 'user.login'
+login_manager.login_message = '该操作需要登入权限'
+login_manager.login_message_category = 'info'
 
 
 def create_app(config: Config):
@@ -19,7 +19,6 @@ def create_app(config: Config):
     app.config.from_object(config)
 
     db.init_app(app)
-    bootstrap.init_app(app)
     login_manager.init_app(app)
     search.init_app(app)
 

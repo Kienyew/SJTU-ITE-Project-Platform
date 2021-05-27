@@ -113,7 +113,12 @@ input[type='file'] {
   display: none;
 }
 
-.file-upload {
+.form-toggle-group {
+  display: flex;
+  justify-content: center;
+}
+
+.file-upload, .file-remove {
   border: 0.1rem solid #ccc;
   background-color: rgb(250, 249, 249);
   border-radius: 2rem;
@@ -121,15 +126,20 @@ input[type='file'] {
   padding: 1.2rem 2rem;
   cursor: pointer;
   font-size: 1.6rem;
-  margin: 0 auto 1rem;
+  margin: 0 1rem 1rem;
 
   transition: 0.4s;
   transition-property: background-color, color;
-} 
+}
 
 .file-upload:hover {
   color: white;
   background-color:green;
+}
+
+.file-remove:hover {
+  color: white;
+  background-color: #db4a29;
 }
 
 .form-picture img {
@@ -137,3 +147,6 @@ input[type='file'] {
   object-fit: cover;
 }
 
+.form-hidden-input {
+  display: none;
+}
