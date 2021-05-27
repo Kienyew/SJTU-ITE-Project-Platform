@@ -9,7 +9,6 @@ import os
 app = create_app(Config)
 migrate = Migrate(app, db)
 
-
 @app.shell_context_processor
 def make_shell_context():
     return {
